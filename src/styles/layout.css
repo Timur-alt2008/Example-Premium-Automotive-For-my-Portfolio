@@ -621,6 +621,9 @@ html.js.is-loaded .loader {
     grid-template-columns: minmax(0, 1.25fr) minmax(0, 0.85fr);
     gap: clamp(40px, 6vw, 112px);
   }
+  .page-hero--split .page-hero__title {
+    font-size: clamp(2.25rem, 0.8rem + 4.1vw, 5.25rem);
+  }
   .page-hero--split .page-hero__media {
     max-height: 72vh;
   }
