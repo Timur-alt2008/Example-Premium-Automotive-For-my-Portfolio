@@ -1,0 +1,12 @@
+{
+  "name": "Example — детейлинг и аренда суперкаров",
+  "short_name": "Example",
+  "start_url": "/Example-Premium-Automotive-For-my-Portfolio/",
+  "display": "standalone",
+  "background_color": "#030304",
+  "theme_color": "#030304",
+  "icons": [
+    { "src": "/Example-Premium-Automotive-For-my-Portfolio/favicon.svg", "sizes": "any", "type": "image/svg+xml" },
+    { "src": "/Example-Premium-Automotive-For-my-Portfolio/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}

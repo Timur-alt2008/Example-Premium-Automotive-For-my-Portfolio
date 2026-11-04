@@ -1,0 +1,31 @@
+{
+  "name": "example-premium-automotive",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Example — premium auto detailing studio and supercar rental. Multi-page portfolio website.",
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/dev.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs",
+    "typecheck": "tsc --noEmit",
+    "test": "playwright test",
+    "check": "npm run typecheck && npm run build && npm test"
+  },
+  "dependencies": {
+    "gsap": "^3.15.1",
+    "lenis": "^1.3.27",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.63.0",
+    "@types/react": "^19.2.0",
+    "@types/react-dom": "^19.2.0",
+    "esbuild": "^0.28.2",
+    "typescript": "^6.0.3"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
