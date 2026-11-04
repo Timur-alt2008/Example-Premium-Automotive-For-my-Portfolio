@@ -1467,3 +1467,33 @@
   flex-wrap: wrap;
   gap: 12px;
 }
+
+/* Phones: the photo gets its own frame above the text so the car stays visible */
+@media (max-width: 760px) {
+  .service-hero,
+  .car-hero {
+    display: block;
+    min-height: 0;
+  }
+  .service-hero__media,
+  .car-hero__media {
+    position: relative;
+    height: min(62svh, 520px);
+  }
+  .car-hero__media .photo img {
+    object-position: 50% 62%;
+  }
+  .service-hero__shade,
+  .car-hero__shade {
+    top: 0;
+    bottom: auto;
+    height: min(62svh, 520px);
+    background: linear-gradient(0deg, var(--void) 0%, rgba(3, 3, 4, 0.2) 35%, rgba(3, 3, 4, 0) 60%, rgba(3, 3, 4, 0.55) 100%);
+  }
+  .service-hero__content,
+  .car-hero__content {
+    padding-top: 0;
+    margin-top: -56px;
+    position: relative;
+  }
+}
