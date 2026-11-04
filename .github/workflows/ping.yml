@@ -1,0 +1,7 @@
+name: ping
+on: workflow_dispatch
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - run: curl -sI https://images.unsplash.com/photo-1707399720709-cd14e30d5e3a?w=10 | head -1
