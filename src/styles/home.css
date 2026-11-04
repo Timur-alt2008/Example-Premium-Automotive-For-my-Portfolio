@@ -203,16 +203,16 @@ html.js .hero:not(.is-ready) .hero__fade {
 .hero__scroll {
   position: absolute;
   right: var(--gutter);
-  bottom: 96px;
+  bottom: 6px;
   display: none;
-  padding: 10px;
+  padding: 10px 0 10px 10px;
 }
 
 .hero__scroll-track {
   display: block;
   position: relative;
   width: 1px;
-  height: 84px;
+  height: 48px;
   background: var(--line-strong);
   overflow: hidden;
 }
@@ -233,7 +233,7 @@ html.js .hero:not(.is-ready) .hero__fade {
     transform: translateY(-24px);
   }
   to {
-    transform: translateY(90px);
+    transform: translateY(54px);
   }
 }
 

@@ -27,4 +27,4 @@ const reveal = () => {
   window.dispatchEvent(new Event('example:ready'));
 };
 const fonts = 'fonts' in document ? document.fonts.ready : Promise.resolve();
-Promise.race([fonts, new Promise((r) => setTimeout(r, 700))]).then(() => requestAnimationFrame(reveal));
+Promise.race([fonts, new Promise((r) => setTimeout(r, 600))]).then(() => setTimeout(reveal, 16));
