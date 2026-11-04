@@ -94,6 +94,7 @@ test('car page: booking form is built in and calculates the price', async ({ pag
   void errors;
   await open(page, '/cars/mclaren-720s/');
   await page.locator('.car-hero').getByRole('link', { name: /Забронировать/ }).click();
+  await page.waitForTimeout(1500); // smooth scroll to the form
   await pickDay(page, '#booking', 1);
   await pickDay(page, '#booking', 8); // 7 days → 15%
   await expect(page.getByTestId('rental-summary')).toContainText('Скидка 15%');
