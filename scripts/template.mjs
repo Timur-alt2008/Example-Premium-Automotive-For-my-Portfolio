@@ -6,7 +6,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
  * HTML document for one route. `heroImage` (optional) is preloaded so the first
  * screen photo starts downloading before the JavaScript bundle runs.
  */
-export function page({ path, meta, image, body, js, css, heroImage }) {
+export function page({ path, meta, image, body, js, css, heroImage, preloads = [] }) {
   const url = SITE + path;
   return `<!doctype html>
 <html lang="ru">
@@ -41,6 +41,7 @@ ${heroImage ? `<link rel="preload" as="image" imagesrcset="${esc(heroImage.srcse
 <link rel="stylesheet" href="${css}">
 <script>document.documentElement.classList.add('js')</script>
 <script type="module" src="${js}"></script>
+${preloads.map((p) => `<link rel="modulepreload" href="${p}">`).join('\n')}
 </head>
 <body>
 <div class="loader" aria-hidden="true"><span class="loader__word">EXAMPLE</span><span class="loader__line"></span></div>

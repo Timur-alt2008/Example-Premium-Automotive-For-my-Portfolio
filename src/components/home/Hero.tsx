@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type PointerEvent } from 'react';
 import { cars } from '../../data/cars';
 import { openStatus } from '../../data/company';
-import { gsap, prefersReducedMotion } from '../../lib/motion';
+import { loadMotion, prefersReducedMotion } from '../../lib/motion';
 import { Link } from '../../router/router';
 import { Icon } from '../ui/Icon';
 import { Photo } from '../ui/Photo';
@@ -19,8 +19,10 @@ export function Hero() {
     const el = root.current;
     if (!el) return;
     const reduced = prefersReducedMotion();
-    let ctx: gsap.Context | null = null;
-    const start = () => {
+    let ctx: { revert: () => void } | null = null;
+    let alive = true;
+    const start = () => loadMotion().then(({ gsap }) => {
+    if (!alive) return;
     ctx = gsap.context(() => {
       if (reduced) {
         gsap.set('.hero__veil', { autoAlpha: 0 });
@@ -48,10 +50,11 @@ export function Hero() {
         scrollTrigger: { trigger: el, start: 'center center', end: 'bottom top', scrub: true },
       });
     }, el);
-    };
+    });
     if (document.documentElement.classList.contains('is-loaded')) start();
     else window.addEventListener('example:ready', start, { once: true });
     return () => {
+      alive = false;
       window.removeEventListener('example:ready', start);
       ctx?.revert();
     };

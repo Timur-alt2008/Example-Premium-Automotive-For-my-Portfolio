@@ -1,27 +1,49 @@
-import { gsap } from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Lenis from 'lenis';
+/**
+ * Animation runtime. GSAP, ScrollTrigger and Lenis load in a separate chunk after the
+ * first paint, so they never block rendering of the page itself.
+ */
+import type { gsap as GsapType } from 'gsap';
+import type { ScrollTrigger as ScrollTriggerType } from 'gsap/ScrollTrigger';
+import type LenisType from 'lenis';
 
-gsap.registerPlugin(ScrollTrigger);
+export interface Motion {
+  gsap: typeof GsapType;
+  ScrollTrigger: typeof ScrollTriggerType;
+}
 
-export { gsap, ScrollTrigger };
-
-let lenis: Lenis | null = null;
+let pending: Promise<Motion> | null = null;
+let loaded: Motion | null = null;
+let lenis: LenisType | null = null;
 
 export function prefersReducedMotion(): boolean {
   return typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 }
 
+export function loadMotion(): Promise<Motion> {
+  pending ??= Promise.all([import('gsap'), import('gsap/ScrollTrigger')]).then(([g, st]) => {
+    g.gsap.registerPlugin(st.ScrollTrigger);
+    loaded = { gsap: g.gsap, ScrollTrigger: st.ScrollTrigger };
+    return loaded;
+  });
+  return pending;
+}
+
+/** Recalculates scroll-driven animations after layout changes (no-op until loaded). */
+export function refreshScroll(): void {
+  loaded?.ScrollTrigger.refresh();
+}
+
 /** Smooth scrolling for fine pointers only; touch devices keep native momentum scrolling. */
-export function startSmoothScroll(): void {
+export async function startSmoothScroll(): Promise<void> {
   if (lenis || prefersReducedMotion() || !window.matchMedia('(pointer: fine)').matches) return;
-  lenis = new Lenis({ duration: 1.1, easing: (t) => 1 - Math.pow(1 - t, 4), smoothWheel: true });
+  const [{ gsap, ScrollTrigger }, { default: Lenis }] = await Promise.all([loadMotion(), import('lenis')]);
+  lenis = new Lenis({ duration: 1.1, easing: (t: number) => 1 - Math.pow(1 - t, 4), smoothWheel: true });
   lenis.on('scroll', ScrollTrigger.update);
   gsap.ticker.add((time) => lenis?.raf(time * 1000));
   gsap.ticker.lagSmoothing(0);
 }
 
-export function getLenis(): Lenis | null {
+export function getLenis(): LenisType | null {
   return lenis;
 }
 

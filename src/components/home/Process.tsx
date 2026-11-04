@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { processSteps } from '../../data/company';
-import { gsap, prefersReducedMotion } from '../../lib/motion';
+import { loadMotion, prefersReducedMotion } from '../../lib/motion';
 import { Split } from '../ui/Split';
 
 /** Five-step sequence. A line of light runs along the steps as the section scrolls. */
@@ -10,13 +10,21 @@ export function Process() {
   useEffect(() => {
     const el = root.current;
     if (!el || prefersReducedMotion()) return;
-    const ctx = gsap.context(() => {
+    let ctx: { revert: () => void } | null = null;
+    let alive = true;
+    loadMotion().then(({ gsap }) => {
+    if (!alive) return;
+    ctx = gsap.context(() => {
       gsap.fromTo('.process__beam', { scaleX: 0, scaleY: 0 }, { scaleX: 1, scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.process__track', start: 'top 75%', end: 'bottom 55%', scrub: 0.6 } });
       gsap.utils.toArray<HTMLElement>('.process__step').forEach((step) => {
         gsap.fromTo(step, { autoAlpha: 0.25 }, { autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 55%', scrub: true } });
       });
     }, el);
-    return () => ctx.revert();
+    });
+    return () => {
+      alive = false;
+      ctx?.revert();
+    };
   }, []);
 
   return (

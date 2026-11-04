@@ -9,7 +9,7 @@ import { Split } from '../components/ui/Split';
 import { bodyLabels, carBySlug, carName, categoryLabels, driveLabels, similarCars } from '../data/cars';
 import { discountRules, rentalExtras, rentalTerms } from '../data/content';
 import { days, formatDecimal, formatNumber, formatPrice, seats } from '../lib/format';
-import { gsap, prefersReducedMotion } from '../lib/motion';
+import { loadMotion, prefersReducedMotion } from '../lib/motion';
 import { Link, useSearchParams } from '../router/router';
 
 /** Big numerals that count up once when they scroll into view. */
@@ -20,23 +20,18 @@ function Readout({ value, decimals = 0, unit, label }: { value: number; decimals
     const el = ref.current;
     if (!el || prefersReducedMotion()) return;
     const state = { v: decimals ? value * 2.2 : 0 };
-    const tween = gsap.to(state, {
-      v: value,
-      duration: 1.6,
-      ease: 'power3.out',
-      paused: true,
-      onUpdate: () => (el.textContent = format(state.v)),
-    });
+    let tween: { kill: () => void } | null = null;
     const io = new IntersectionObserver(([e]) => {
-      if (e.isIntersecting) {
-        tween.play();
-        io.disconnect();
-      }
+      if (!e.isIntersecting) return;
+      io.disconnect();
+      loadMotion().then(({ gsap }) => {
+        tween = gsap.to(state, { v: value, duration: 1.6, ease: 'power3.out', onUpdate: () => (el.textContent = format(state.v)) });
+      });
     });
     io.observe(el);
     return () => {
       io.disconnect();
-      tween.kill();
+      tween?.kill();
       el.textContent = format(value);
     };
   }, [value]);

@@ -21,6 +21,8 @@ const client = await build({
   bundle: true,
   minify: true,
   format: 'esm',
+  splitting: true,
+  chunkNames: 'chunks/[name]-[hash]',
   target: ['es2020', 'safari15', 'firefox100', 'chrome100'],
   outdir: `${OUT}/assets`,
   entryNames: '[name]-[hash]',
@@ -31,10 +33,12 @@ const client = await build({
   legalComments: 'none',
   charset: 'utf8',
   logLevel: 'warning',
+  logOverride: { 'package.json': 'silent' },
 });
 const outputs = Object.keys(client.metafile.outputs);
-const js = outputs.find((f) => f.endsWith('.js')).replace(`${OUT}`, BASE);
-const css = outputs.find((f) => f.endsWith('.css')).replace(`${OUT}`, BASE);
+const mainOut = outputs.find((f) => client.metafile.outputs[f].entryPoint === 'src/main.tsx');
+const js = mainOut.replace(`${OUT}`, BASE);
+const css = client.metafile.outputs[mainOut].cssBundle.replace(`${OUT}`, BASE);
 
 // 2. Server bundle used only at build time for pre-rendering
 await build({
@@ -47,9 +51,27 @@ await build({
   define,
   loader: { '.css': 'empty' },
   logLevel: 'warning',
+  logOverride: { 'package.json': 'silent' },
   banner: { js: "import { createRequire } from 'module'; const require = createRequire(import.meta.url);" },
 });
 const server = await import(pathToFileURL(join(process.cwd(), '.cache/server.mjs')).href + `?t=${Date.now()}`);
+await server.prepare();
+
+// Chunks each page needs, so the HTML can modulepreload them in parallel with main.js.
+const chunkFor = {};
+for (const [file, info] of Object.entries(client.metafile.outputs)) if (info.entryPoint && file.endsWith('.js')) chunkFor[info.entryPoint] = file;
+const preloadsFor = (name) => {
+  const seen = new Set();
+  const walk = (file) => {
+    if (!file || seen.has(file)) return;
+    seen.add(file);
+    for (const imp of client.metafile.outputs[file].imports) if (imp.kind === 'import-statement') walk(imp.path);
+  };
+  walk(chunkFor[server.pageSources[name]]);
+  walk(mainOut);
+  seen.delete(mainOut);
+  return [...seen].map((f) => f.replace(OUT, BASE));
+};
 
 // 3. Pre-render
 const paths = server.allPaths();
@@ -58,7 +80,7 @@ const heroFor = (path) => (path === '/' ? { srcset: server.photoSrcSet('hero-sil
 for (const path of paths) {
   const match = server.matchRoute(path);
   const meta = server.metaFor(match);
-  const html = page({ path, meta, image: server.ogImage(meta), body: server.render(path), js, css, heroImage: heroFor(path) });
+  const html = page({ path, meta, image: server.ogImage(meta), body: server.render(path), js, css, heroImage: heroFor(path), preloads: preloadsFor(match.name) });
   const file = join(OUT, path, 'index.html');
   await mkdir(dirname(file), { recursive: true });
   await writeFile(file, html);
@@ -67,7 +89,7 @@ for (const path of paths) {
 // 404 page: GitHub Pages serves it for unknown URLs; the client router renders «not found».
 {
   const meta = server.metaFor({ name: 'notFound', params: {} });
-  await writeFile(join(OUT, '404.html'), page({ path: '/404/', meta, image: server.ogImage(meta), body: server.render('/404/'), js, css }));
+  await writeFile(join(OUT, '404.html'), page({ path: '/404/', meta, image: server.ogImage(meta), body: server.render('/404/'), js, css, preloads: preloadsFor('notFound') }));
 }
 
 // 4. Static files, sitemap, robots
