@@ -115,7 +115,7 @@ export function photoUrl(key: PhotoKey, { width, ratio, quality = 72 }: PhotoUrl
   return `${CDN}${photo.id}?${params.toString()}`;
 }
 
-export const PHOTO_WIDTHS = [480, 768, 1080, 1440, 1920, 2400];
+export const PHOTO_WIDTHS = [160, 320, 480, 768, 1080, 1440, 1920, 2400];
 
 export function photoSrcSet(key: PhotoKey, ratio?: number, maxWidth = 2400): string {
   return PHOTO_WIDTHS.filter((w) => w <= maxWidth)

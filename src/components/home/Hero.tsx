@@ -86,7 +86,7 @@ export function Hero() {
           </span>
         </h1>
         <div className="hero__bottom">
-          <p className="hero__lead lead hero__fade">Мы проверяем каждую панель под тремя видами освещения — и только потом отдаём ключи. Будь то ваш автомобиль после полировки или McLaren из нашей коллекции.</p>
+          <p className="hero__lead lead">Мы проверяем каждую панель под тремя видами освещения — и только потом отдаём ключи. Будь то ваш автомобиль после полировки или McLaren из нашей коллекции.</p>
           <div className="hero__actions hero__fade">
             <Link to="/detailing/" className="btn btn--primary">
               Услуги студии <Icon name="arrow" />
