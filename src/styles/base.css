@@ -107,6 +107,7 @@ ol {
 .h2,
 .h3 {
   overflow-wrap: break-word;
+  -webkit-hyphens: auto;
   hyphens: auto;
   font-family: var(--font-display);
   font-weight: 300;
