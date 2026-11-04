@@ -42,18 +42,18 @@ export function PageHero({ title, lead, crumbs, photo, children, variant = photo
           <Breadcrumbs items={crumbs} />
           <Split as="h1" lines={title} className="h1 page-hero__title" />
           {lead ? (
-            <div className="lead page-hero__lead" data-reveal="up" style={{ '--d': 200 } as React.CSSProperties}>
+            <div className="lead page-hero__lead" data-reveal="rise" style={{ '--d': 200 } as React.CSSProperties}>
               {lead}
             </div>
           ) : null}
           {children ? (
-            <div className="page-hero__actions" data-reveal="up" style={{ '--d': 300 } as React.CSSProperties}>
+            <div className="page-hero__actions" data-reveal="rise" style={{ '--d': 300 } as React.CSSProperties}>
               {children}
             </div>
           ) : null}
         </div>
         {photo ? (
-          <div className="page-hero__media" data-reveal="clip">
+          <div className="page-hero__media" data-reveal="rise">
             <Photo k={photo} ratio={4 / 5} priority sizes="(min-width: 900px) 42vw, 100vw" />
             <span className="page-hero__lamp" aria-hidden="true" />
           </div>

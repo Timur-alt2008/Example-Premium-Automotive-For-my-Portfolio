@@ -410,6 +410,12 @@ html.js [data-reveal='up'] {
   transform: translate3d(0, 32px, 0);
 }
 
+/* Above the fold: motion without hiding, so the text counts as painted immediately */
+html.js [data-reveal='rise'] {
+  opacity: 1;
+  transform: translate3d(0, 20px, 0);
+}
+
 html.js [data-reveal='clip'] {
   opacity: 1;
   clip-path: inset(0 0 100% 0);

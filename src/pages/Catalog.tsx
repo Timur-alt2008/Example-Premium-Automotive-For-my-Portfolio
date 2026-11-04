@@ -76,7 +76,7 @@ export default function Catalog() {
               {result.length ? (
                 <div className="cars-grid" data-testid="cars-grid">
                   {result.map((car, i) => (
-                    <CarCard key={car.slug} car={car} priority={i < 2} sizes="(min-width: 1280px) 30vw, (min-width: 720px) 45vw, 100vw" />
+                    <CarCard key={car.slug} car={car} priority={i < 2} headingLevel="h2" sizes="(min-width: 1280px) 30vw, (min-width: 720px) 45vw, 100vw" />
                   ))}
                 </div>
               ) : (
