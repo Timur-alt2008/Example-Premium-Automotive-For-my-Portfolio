@@ -30,12 +30,12 @@ export function Hero() {
         return;
       }
       const tl = gsap.timeline({ defaults: { ease: 'power3.out' }, delay: 0.15 });
-      tl.fromTo('.hero__beam', { xPercent: -100, left: '0%', autoAlpha: 1 }, { left: '100%', xPercent: 0, duration: 1.7, ease: 'power2.inOut' }, 0)
-        .fromTo('.hero__veil', { clipPath: 'inset(0 0 0 0%)' }, { clipPath: 'inset(0 0 0 100%)', duration: 1.7, ease: 'power2.inOut' }, 0)
-        .to('.hero__beam', { autoAlpha: 0, duration: 0.4 }, 1.55)
+      tl.fromTo('.hero__beam', { x: 0, autoAlpha: 1 }, { x: () => el.offsetWidth, duration: 1.4, ease: 'power2.inOut' }, 0)
+        .fromTo('.hero__veil', { clipPath: 'inset(0 0 0 0%)' }, { clipPath: 'inset(0 0 0 100%)', duration: 1.4, ease: 'power2.inOut' }, 0)
+        .to('.hero__beam', { autoAlpha: 0, duration: 0.35 }, 1.25)
         .fromTo('.hero__media .photo', { scale: 1.12 }, { scale: 1, duration: 2.6, ease: 'power2.out' }, 0)
-        .fromTo('.hero__title .split-line > span', { y: 0, yPercent: 110 }, { y: 0, yPercent: 0, duration: 1.2, stagger: 0.12 }, 0.55)
-        .fromTo('.hero__fade', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08, clearProps: 'transform' }, 1.05)
+        .fromTo('.hero__title .split-line > span', { y: 0, yPercent: 110 }, { y: 0, yPercent: 0, duration: 1.2, stagger: 0.12 }, 0.45)
+        .fromTo('.hero__fade', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08, clearProps: 'transform' }, 0.85)
         .add(() => el.classList.add('is-ready'));
 
       gsap.to('.hero__media', {

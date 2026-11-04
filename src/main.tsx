@@ -17,6 +17,7 @@ loadPage(matchRoute(path).name).then(() => {
   } else {
     createRoot(container).render(<Root />);
   }
+  setTimeout(reveal, 0);
   void startSmoothScroll();
   void loadMotion();
 });
@@ -26,5 +27,4 @@ const reveal = () => {
   html.classList.add('is-loaded');
   window.dispatchEvent(new Event('example:ready'));
 };
-const fonts = 'fonts' in document ? document.fonts.ready : Promise.resolve();
-Promise.race([fonts, new Promise((r) => setTimeout(r, 600))]).then(() => setTimeout(reveal, 16));
+

@@ -16,9 +16,6 @@ export function Process() {
     if (!alive) return;
     ctx = gsap.context(() => {
       gsap.fromTo('.process__beam', { scaleX: 0, scaleY: 0 }, { scaleX: 1, scaleY: 1, ease: 'none', scrollTrigger: { trigger: '.process__track', start: 'top 75%', end: 'bottom 55%', scrub: 0.6 } });
-      gsap.utils.toArray<HTMLElement>('.process__step').forEach((step) => {
-        gsap.fromTo(step, { autoAlpha: 0.25 }, { autoAlpha: 1, ease: 'none', scrollTrigger: { trigger: step, start: 'top 80%', end: 'top 55%', scrub: true } });
-      });
     }, el);
     });
     return () => {
@@ -40,7 +37,7 @@ export function Process() {
           <span className="process__beam" aria-hidden="true" />
           <ol className="process__steps">
           {processSteps.map((s, i) => (
-            <li className="process__step" key={s.title}>
+            <li className="process__step" key={s.title} data-reveal="up" style={{ '--d': i * 90 } as React.CSSProperties}>
               <span className="process__num numeral">{String(i + 1).padStart(2, '0')}</span>
               <h3 className="h4">{s.title}</h3>
               <p>{s.text}</p>

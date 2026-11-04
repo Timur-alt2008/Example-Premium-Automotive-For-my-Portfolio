@@ -38,7 +38,7 @@ export function Reviews() {
             ))}
           </div>
           <figure className="review" key={index} aria-live="polite">
-            <div className="review__rating" aria-label={`Оценка ${review.rating} из 5`}>
+            <div className="review__rating" role="img" aria-label={`Оценка ${review.rating} из 5`}>
               {Array.from({ length: 5 }, (_, i) => (
                 <Icon key={i} name="star" className={i < review.rating ? 'is-on' : ''} />
               ))}

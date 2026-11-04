@@ -676,7 +676,11 @@ html.js .hero:not(.is-ready) .hero__fade {
   padding: 28px 0 28px 24px;
   border-left: 1px solid var(--line);
   position: relative;
-  transition: opacity 0.6s;
+}
+
+.advantage .h4,
+.advantage p {
+  transition: color 0.6s;
 }
 
 .advantage::before {
@@ -731,8 +735,11 @@ html.js .hero:not(.is-ready) .hero__fade {
   .advantage {
     padding: 36px 0 36px 36px;
   }
-  .advantage:not(.is-active) {
-    opacity: 0.45;
+  .advantage:not(.is-active) .h4 {
+    color: var(--silver);
+  }
+  .advantage:not(.is-active) p {
+    color: var(--silver);
   }
 }
 
