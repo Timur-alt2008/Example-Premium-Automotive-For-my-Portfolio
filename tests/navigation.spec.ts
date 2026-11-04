@@ -90,3 +90,13 @@ test('every internal link on key pages points to an existing page', async ({ pag
     expect(res.status(), href).toBe(200);
   }
 });
+
+test('sections revealed on scroll become visible', async ({ page, errors }) => {
+  void errors;
+  await open(page, '/');
+  for (const selector of ['.direction', '.intro__statement', '.process__step']) {
+    const el = page.locator(selector).first();
+    await el.scrollIntoViewIfNeeded();
+    await expect(el).toHaveClass(/is-in/, { timeout: 4000 });
+  }
+});
