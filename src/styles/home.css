@@ -139,7 +139,7 @@ html.js .hero:not(.is-ready) .hero__fade {
 }
 
 .hero__title {
-  font-size: clamp(2.75rem, 0.6rem + 8.4vw, 10rem);
+  font-size: clamp(2.5rem, 0.5rem + 6.6vw, 8.5rem);
   font-weight: 200;
   letter-spacing: -0.045em;
   line-height: 0.9;
@@ -1166,7 +1166,7 @@ html:not(.js) .process__beam {
 }
 
 .cta__title {
-  font-size: clamp(2.4rem, 1rem + 5.5vw, 7rem);
+  font-size: clamp(2.1rem, 0.8rem + 4.4vw, 5.75rem);
   font-weight: 200;
 }
 

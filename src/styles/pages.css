@@ -297,7 +297,7 @@
 }
 
 .service-hero__title {
-  font-size: clamp(2.4rem, 1rem + 5.4vw, 7rem);
+  font-size: clamp(2.1rem, 0.8rem + 4.2vw, 5.5rem);
   font-weight: 200;
   max-width: 16ch;
 }
@@ -655,7 +655,7 @@
 }
 
 .car-hero__title {
-  font-size: clamp(2.6rem, 0.8rem + 7vw, 9rem);
+  font-size: clamp(2.3rem, 0.6rem + 5.6vw, 7rem);
   font-weight: 200;
   max-width: 14ch;
 }

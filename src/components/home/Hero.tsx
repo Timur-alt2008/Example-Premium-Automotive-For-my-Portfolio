@@ -34,8 +34,8 @@ export function Hero() {
         .fromTo('.hero__veil', { clipPath: 'inset(0 0 0 0%)' }, { clipPath: 'inset(0 0 0 100%)', duration: 1.7, ease: 'power2.inOut' }, 0)
         .to('.hero__beam', { autoAlpha: 0, duration: 0.4 }, 1.55)
         .fromTo('.hero__media .photo', { scale: 1.12 }, { scale: 1, duration: 2.6, ease: 'power2.out' }, 0)
-        .fromTo('.hero__title .split-line > span', { yPercent: 110 }, { yPercent: 0, duration: 1.2, stagger: 0.12 }, 0.55)
-        .fromTo('.hero__fade', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08 }, 1.05)
+        .fromTo('.hero__title .split-line > span', { y: 0, yPercent: 110 }, { y: 0, yPercent: 0, duration: 1.2, stagger: 0.12 }, 0.55)
+        .fromTo('.hero__fade', { autoAlpha: 0, y: 18 }, { autoAlpha: 1, y: 0, duration: 1, stagger: 0.08, clearProps: 'transform' }, 1.05)
         .add(() => el.classList.add('is-ready'));
 
       gsap.to('.hero__media', {
