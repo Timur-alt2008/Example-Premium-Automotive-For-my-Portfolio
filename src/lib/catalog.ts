@@ -4,11 +4,11 @@ import { cars } from '../data/cars';
 export type SortKey = 'popular' | 'price-asc' | 'price-desc' | 'power-desc' | 'name';
 
 export const sortLabels: Record<SortKey, string> = {
-  popular: 'По популярности',
-  'price-asc': 'Сначала дешевле',
-  'price-desc': 'Сначала дороже',
-  'power-desc': 'По мощности',
-  name: 'По названию',
+  popular: 'Most popular',
+  'price-asc': 'Price: low to high',
+  'price-desc': 'Price: high to low',
+  'power-desc': 'By power',
+  name: 'By name',
 };
 
 export interface CatalogFilters {

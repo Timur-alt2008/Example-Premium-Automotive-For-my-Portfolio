@@ -1193,7 +1193,7 @@ html:not(.js) .photo img {
 }
 
 .hours li.is-today span:first-child::after {
-  content: 'сегодня';
+  content: 'today';
   margin-left: 10px;
   font-size: 0.75rem;
   font-weight: 500;

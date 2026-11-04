@@ -13,41 +13,41 @@ export interface Review {
 
 export const reviews: Review[] = [
   {
-    author: 'Андрей К.',
-    context: 'Керамика, Porsche 911 GT3',
-    text: 'Попросил показать машину до работ под фонарём — увидел паутинку, о которой не знал. Через три дня её не было ни под одним светом. Вода теперь скатывается уже на 60 км/ч.',
+    author: 'Andrew K.',
+    context: 'Ceramic, Porsche 911 GT3',
+    text: 'I asked to see the car under the inspection lamp before the work — and saw swirl marks I never knew about. Three days later they were gone under every light. Water now beads off at 60 km/h.',
     rating: 5,
     date: '2026-09-14',
     photo: 'gt3-a',
   },
   {
-    author: 'Марина Л.',
-    context: 'Аренда, Rolls-Royce Cullinan',
-    text: 'Брали Cullinan на свадьбу сестры. Машину привезли к дому за час до назначенного времени, водитель знал маршрут лучше нас. Салон пах кожей, а не освежителем.',
+    author: 'Marina L.',
+    context: 'Rental, Rolls-Royce Cullinan',
+    text: 'We took the Cullinan for my sister’s wedding. The car arrived an hour early, and the driver knew the route better than we did. The cabin smelled of leather, not air freshener.',
     rating: 5,
     date: '2026-08-02',
     photo: 'cullinan-a',
   },
   {
-    author: 'Олег Р.',
+    author: 'Oleg R.',
     context: 'PPF, Ferrari F8 Tributo',
-    text: 'Оклеили весь перед. Через месяц я честно искал кромки на капоте и не нашёл. Отдельно понравилось, что прислали фото каждого этапа.',
+    text: 'They wrapped the whole front. A month later I honestly looked for the edges on the bonnet and could not find them. I also liked that they sent photos of every stage.',
     rating: 5,
     date: '2026-06-21',
     photo: 'f8-a',
   },
   {
-    author: 'Виктория С.',
-    context: 'Аренда, McLaren 720S',
-    text: 'Перед выдачей полчаса объясняли режимы шасси и показали, как работает подъём передней оси. Ни одной лишней бумаги, всё понятно с первого раза.',
+    author: 'Victoria S.',
+    context: 'Rental, McLaren 720S',
+    text: 'Before the handover they spent half an hour explaining the chassis modes and showed me how the front-axle lift works. No unnecessary paperwork, everything clear the first time.',
     rating: 5,
     date: '2026-05-30',
     photo: 'mclaren-a',
   },
   {
-    author: 'Денис М.',
-    context: 'Химчистка, Bentley Continental GT',
-    text: 'Светлая кожа после двух лет с детьми выглядела уставшей. Вернули исходный цвет без глянца. Срок выдержали точно.',
+    author: 'Denis M.',
+    context: 'Deep clean, Bentley Continental GT',
+    text: 'Light leather looked tired after two years with kids. They brought back the original colour without any shine. And they finished exactly on time.',
     rating: 4,
     date: '2026-04-11',
     photo: 'int-tan',
@@ -59,9 +59,9 @@ export const reviews: Review[] = [
 export type FaqCategory = 'rental' | 'detailing' | 'booking';
 
 export const faqCategoryLabels: Record<FaqCategory, string> = {
-  rental: 'Аренда автомобилей',
-  detailing: 'Детейлинг',
-  booking: 'Бронирование',
+  rental: 'Car rental',
+  detailing: 'Detailing',
+  booking: 'Booking',
 };
 
 export interface FaqItem {
@@ -71,20 +71,20 @@ export interface FaqItem {
 }
 
 export const faq: FaqItem[] = [
-  { category: 'rental', q: 'Какие документы необходимы?', a: 'Паспорт или ID-карта, водительское удостоверение со стажем от 5 лет и банковская карта для залога на имя водителя. Для некоторых автомобилей минимальный возраст — 27 или 30 лет; он указан на странице машины.' },
-  { category: 'rental', q: 'Как рассчитывается стоимость?', a: 'Суточная ставка умножается на количество дней аренды. От 3 дней действует скидка 10%, от 7 дней — 15%. Дополнительные услуги, например доставка или второй водитель, добавляются отдельной строкой. Итог вы видите до отправки заявки.' },
-  { category: 'rental', q: 'Предусмотрен ли залог?', a: 'Да. Сумма залога зависит от автомобиля и указана на его странице — от 10 000 до 25 000 €. Залог блокируется на карте и разблокируется в течение 3 рабочих дней после возврата.' },
-  { category: 'rental', q: 'Можно ли продлить аренду?', a: 'Да, если автомобиль свободен на следующие даты. Напишите нам за 24 часа до окончания аренды — продление считается по той же ставке и со скидкой за общий срок.' },
-  { category: 'rental', q: 'Как происходит получение автомобиля?', a: 'В студии или с доставкой по адресу. Мы показываем автомобиль, фиксируем пробег и состояние на фото, объясняем режимы и органы управления. Обычно это занимает 30–40 минут.' },
-  { category: 'rental', q: 'Какие ограничения действуют при аренде?', a: 'Суточный лимит пробега указан на странице машины. Запрещены трек-дни, дрифт, буксировка и передача управления лицу, не указанному в договоре. Выезд за пределы страны согласуется заранее.' },
-  { category: 'detailing', q: 'Сколько времени занимает полировка?', a: 'Одношаговое восстановление блеска — один день. Полная многоступенчатая коррекция — два–три дня, в зависимости от размера автомобиля и состояния лака.' },
-  { category: 'detailing', q: 'Как долго держится керамическое покрытие?', a: 'От двух до пяти лет в зависимости от выбранного состава и ухода. Мы выдаём сертификат и приглашаем на бесплатный осмотр через полгода.' },
-  { category: 'detailing', q: 'Что такое PPF-плёнка?', a: 'Прозрачная полиуретановая плёнка толщиной около 200 мкм. Она принимает на себя сколы и царапины, а мелкие повреждения верхнего слоя затягиваются при нагреве. Служит 7–10 лет.' },
-  { category: 'detailing', q: 'Как подготовить автомобиль?', a: 'Ничего специально делать не нужно. Освободите салон и багажник от личных вещей и предупредите нас о известных повреждениях — мы учтём их при осмотре.' },
-  { category: 'detailing', q: 'Можно ли записаться заранее?', a: 'Да, запись открыта на 60 дней вперёд. Для PPF и многоступенчатой полировки рекомендуем бронировать за две–три недели.' },
-  { category: 'booking', q: 'Как отправить заявку?', a: 'Выберите автомобиль или услугу, даты и время, оставьте контакты и нажмите «Отправить заявку». Менеджер свяжется с вами в течение 30 минут в рабочее время.' },
-  { category: 'booking', q: 'Как изменить дату?', a: 'Позвоните или напишите нам, указав номер заявки. Изменение даты бесплатно, если до начала аренды или визита больше 48 часов.' },
-  { category: 'booking', q: 'Как отменить заявку?', a: 'Сообщите номер заявки по телефону или почте. Отмена бесплатна за 48 часов и больше; при более поздней отмене удерживается стоимость одних суток аренды.' },
+  { category: 'rental', q: 'What documents do I need?', a: 'A passport or ID card, a driving licence held for at least 5 years and a bank card in the driver’s name for the deposit. Some cars require a minimum age of 27 or 30; it is shown on the car’s page.' },
+  { category: 'rental', q: 'How is the price calculated?', a: 'The daily rate is multiplied by the number of rental days. Rentals of 3 days or more get 10% off, 7 days or more get 15% off. Extras such as delivery or a second driver are added as separate lines. You see the total before you send the request.' },
+  { category: 'rental', q: 'Is there a deposit?', a: 'Yes. The deposit depends on the car and is shown on its page — from €10,000 to €25,000. It is held on your card and released within 3 working days after return.' },
+  { category: 'rental', q: 'Can I extend my rental?', a: 'Yes, if the car is free on the following dates. Write to us 24 hours before the rental ends — the extension is charged at the same rate, with the discount applied to the total length.' },
+  { category: 'rental', q: 'How does the car handover work?', a: 'At the studio or delivered to your address. We walk you around the car, record mileage and condition on photos, and explain the drive modes and controls. It usually takes 30–40 minutes.' },
+  { category: 'rental', q: 'What restrictions apply to rentals?', a: 'The daily mileage limit is listed on each car’s page. Track days, drifting, towing and letting anyone not named in the contract drive are not allowed. Trips abroad must be agreed in advance.' },
+  { category: 'detailing', q: 'How long does polishing take?', a: 'A one-step gloss enhancement takes one day. A full multi-stage correction takes two to three days, depending on the size of the car and the condition of the paint.' },
+  { category: 'detailing', q: 'How long does a ceramic coating last?', a: 'From two to five years, depending on the product and how the car is cared for. We issue a certificate and invite you for a free check-up after six months.' },
+  { category: 'detailing', q: 'What is PPF?', a: 'A clear polyurethane film about 200 µm thick. It takes stone chips and scratches, and light damage to the top layer heals with heat. It lasts 7–10 years.' },
+  { category: 'detailing', q: 'How should I prepare my car?', a: 'Nothing special is needed. Clear personal items out of the cabin and boot and tell us about any known damage — we will take it into account at inspection.' },
+  { category: 'detailing', q: 'Can I book in advance?', a: 'Yes, bookings are open 60 days ahead. For PPF and multi-stage polishing we recommend booking two to three weeks in advance.' },
+  { category: 'booking', q: 'How do I send a request?', a: 'Choose a car or a service, dates and time, leave your contact details and press “Send request”. A manager will contact you within 30 minutes during working hours.' },
+  { category: 'booking', q: 'How do I change the date?', a: 'Call or write to us with your request number. Changing the date is free more than 48 hours before the rental or visit.' },
+  { category: 'booking', q: 'How do I cancel a request?', a: 'Give your request number by phone or e-mail. Cancelling is free 48 hours or more in advance; later cancellations are charged one day of rental.' },
 ];
 
 /* ---------- Gallery ---------- */
@@ -92,12 +92,12 @@ export const faq: FaqItem[] = [
 export type GalleryCategory = 'supercars' | 'detailing' | 'interior' | 'exterior' | 'before-after' | 'workshop';
 
 export const galleryCategoryLabels: Record<GalleryCategory, string> = {
-  supercars: 'Суперкары',
-  detailing: 'Детейлинг',
-  interior: 'Салон',
-  exterior: 'Экстерьер',
-  'before-after': 'До и после',
-  workshop: 'Мастерская',
+  supercars: 'Supercars',
+  detailing: 'Detailing',
+  interior: 'Interior',
+  exterior: 'Exterior',
+  'before-after': 'Before and after',
+  workshop: 'Workshop',
 };
 
 export interface GalleryItem {
@@ -111,30 +111,30 @@ export interface GalleryItem {
 }
 
 export const gallery: GalleryItem[] = [
-  { photo: 'aventador-smoke', category: 'supercars', caption: 'Съёмка для коллекции, бокс № 3', shape: 'big' },
-  { photo: 'det-polish', category: 'detailing', caption: 'Коррекция лака, второй этап', shape: 'tall' },
-  { photo: 'int-tan', category: 'interior', caption: 'Кожа после очистки и кондиционирования' },
-  { photo: 'amg-gt-monaco', category: 'exterior', caption: 'Матовая плёнка на Mercedes-AMG GT', shape: 'wide' },
-  { photo: 'bentley-a', category: 'before-after', caption: 'Bentley Continental GT: полировка', compare: 0 },
-  { photo: 'studio-b', category: 'workshop', caption: 'Бокс для керамики со светом 6500 K', shape: 'wide' },
-  { photo: 'mclaren-a', category: 'supercars', caption: 'McLaren 720S перед выдачей клиенту', shape: 'tall' },
-  { photo: 'det-beading', category: 'detailing', caption: 'Гидрофобный эффект через неделю после керамики' },
-  { photo: 'int-red-wheel', category: 'interior', caption: 'Алькантара и кожа после химчистки' },
+  { photo: 'aventador-smoke', category: 'supercars', caption: 'Shoot for the collection, bay no. 3', shape: 'big' },
+  { photo: 'det-polish', category: 'detailing', caption: 'Paint correction, second stage', shape: 'tall' },
+  { photo: 'int-tan', category: 'interior', caption: 'Leather after cleaning and conditioning' },
+  { photo: 'amg-gt-monaco', category: 'exterior', caption: 'Matte film on a Mercedes-AMG GT', shape: 'wide' },
+  { photo: 'bentley-a', category: 'before-after', caption: 'Bentley Continental GT: polishing', compare: 0 },
+  { photo: 'studio-b', category: 'workshop', caption: 'A ceramic bay with 6500 K light', shape: 'wide' },
+  { photo: 'mclaren-a', category: 'supercars', caption: 'A McLaren 720S before handover to a client', shape: 'tall' },
+  { photo: 'det-beading', category: 'detailing', caption: 'The beading effect one week after a ceramic coating' },
+  { photo: 'int-red-wheel', category: 'interior', caption: 'Alcantara and leather after a deep clean' },
   { photo: 'huracan-sto', category: 'supercars', caption: 'Lamborghini Huracán STO', shape: 'wide' },
-  { photo: 'det-film-orange', category: 'detailing', caption: 'Оклейка переднего крыла PPF', shape: 'tall' },
-  { photo: 'int-tan', category: 'before-after', caption: 'Салон: очистка кожи', compare: 1 },
-  { photo: 'workshop-colors', category: 'workshop', caption: 'Посты подготовки' },
-  { photo: 'gt3-c', category: 'exterior', caption: 'Porsche 911 GT3 после керамики', shape: 'wide' },
-  { photo: 'det-wheel', category: 'detailing', caption: 'Очистка дисков со снятием колёс' },
-  { photo: 'cullinan-a', category: 'exterior', caption: 'Rolls-Royce Cullinan, подготовка к выдаче', shape: 'tall' },
-  { photo: 'wheel-light', category: 'before-after', caption: 'Колёсный диск: удаление тормозной пыли', compare: 2 },
-  { photo: 'int-white', category: 'interior', caption: 'Светлая кожа и потолок', shape: 'wide' },
-  { photo: 'studio-a', category: 'workshop', caption: 'Зона выдачи автомобилей', shape: 'big' },
+  { photo: 'det-film-orange', category: 'detailing', caption: 'PPF on a front wing', shape: 'tall' },
+  { photo: 'int-tan', category: 'before-after', caption: 'Interior: leather cleaning', compare: 1 },
+  { photo: 'workshop-colors', category: 'workshop', caption: 'Preparation bays' },
+  { photo: 'gt3-c', category: 'exterior', caption: 'A Porsche 911 GT3 after ceramic', shape: 'wide' },
+  { photo: 'det-wheel', category: 'detailing', caption: 'Wheel cleaning with the wheels removed' },
+  { photo: 'cullinan-a', category: 'exterior', caption: 'Rolls-Royce Cullinan, prepared for handover', shape: 'tall' },
+  { photo: 'wheel-light', category: 'before-after', caption: 'A wheel: removing brake dust', compare: 2 },
+  { photo: 'int-white', category: 'interior', caption: 'Light leather and headliner', shape: 'wide' },
+  { photo: 'studio-a', category: 'workshop', caption: 'Car handover area', shape: 'big' },
   { photo: 'f8-b', category: 'supercars', caption: 'Ferrari F8 Tributo' },
-  { photo: 'det-film-tape', category: 'detailing', caption: 'Раскрой плёнки по контуру' },
-  { photo: 'int-portofino', category: 'interior', caption: 'Панель приборов после ухода за пластиком' },
-  { photo: 'urus-green-garage', category: 'supercars', caption: 'Lamborghini Urus на парковке студии', shape: 'wide' },
-  { photo: 'det-wax-a', category: 'workshop', caption: 'Нанесение керамики в отдельном боксе' },
+  { photo: 'det-film-tape', category: 'detailing', caption: 'Cutting film to shape' },
+  { photo: 'int-portofino', category: 'interior', caption: 'The dashboard after plastic care' },
+  { photo: 'urus-green-garage', category: 'supercars', caption: 'A Lamborghini Urus in the studio car park', shape: 'wide' },
+  { photo: 'det-wax-a', category: 'workshop', caption: 'Applying ceramic in a separate bay' },
 ];
 
 /* ---------- Before / After ---------- */
@@ -144,15 +144,15 @@ export interface BeforeAfterCase {
   title: string;
   service: string;
   serviceSlug: string;
-  /** Which simulated defects to show on the «before» side. */
+  /** Which simulated defects to show on the “before” side. */
   defects: 'swirls' | 'stains' | 'dust';
   note: string;
 }
 
 export const beforeAfterCases: BeforeAfterCase[] = [
-  { photo: 'bentley-a', title: 'Bentley Continental GT', service: 'Многоступенчатая полировка', serviceSlug: 'paint-polishing', defects: 'swirls', note: 'Голограммы и паутинка после автоматических моек.' },
-  { photo: 'int-tan', title: 'Кожаный салон', service: 'Очистка и кондиционирование кожи', serviceSlug: 'leather-cleaning', defects: 'stains', note: 'Потемневшая кожа и перенос красителя на сиденье водителя.' },
-  { photo: 'wheel-light', title: 'Кованый диск', service: 'Очистка дисков', serviceSlug: 'wheel-cleaning', defects: 'dust', note: 'Запёкшаяся тормозная пыль на спицах и ободе.' },
+  { photo: 'bentley-a', title: 'Bentley Continental GT', service: 'Multi-stage polishing', serviceSlug: 'paint-polishing', defects: 'swirls', note: 'Holograms and swirls from automatic car washes.' },
+  { photo: 'int-tan', title: 'Leather interior', service: 'Leather cleaning and conditioning', serviceSlug: 'leather-cleaning', defects: 'stains', note: 'Darkened leather and dye transfer on the driver’s seat.' },
+  { photo: 'wheel-light', title: 'Forged wheel', service: 'Wheel cleaning', serviceSlug: 'wheel-cleaning', defects: 'dust', note: 'Baked-on brake dust on the spokes and rim.' },
 ];
 
 /* ---------- Rental extras ---------- */
@@ -166,25 +166,25 @@ export interface RentalExtra {
 }
 
 export const rentalExtras: RentalExtra[] = [
-  { id: 'delivery', label: 'Доставка и возврат по адресу', note: 'В пределах города, в удобное время', price: 150, per: 'rental' },
-  { id: 'driver2', label: 'Второй водитель', note: 'Стаж от 5 лет', price: 90, per: 'day' },
-  { id: 'insurance', label: 'Расширенная страховка', note: 'Снижает франшизу до 2 500 €', price: 120, per: 'day' },
-  { id: 'chauffeur', label: 'Водитель Example', note: 'До 10 часов в сутки', price: 390, per: 'day' },
-  { id: 'photo', label: 'Фотосессия с автомобилем', note: '2 часа, 30 обработанных кадров', price: 250, per: 'rental' },
+  { id: 'delivery', label: 'Delivery and return to your address', note: 'Within the city, at a time that suits you', price: 150, per: 'rental' },
+  { id: 'driver2', label: 'Second driver', note: '5+ years’ licence', price: 90, per: 'day' },
+  { id: 'insurance', label: 'Extended insurance', note: 'Reduces the excess to €2,500', price: 120, per: 'day' },
+  { id: 'chauffeur', label: 'Example driver', note: 'Up to 10 hours a day', price: 390, per: 'day' },
+  { id: 'photo', label: 'Photo shoot with your car', note: '2 hours, 30 edited shots', price: 250, per: 'rental' },
 ];
 
 export const rentalTerms = [
-  'Водитель от 23–30 лет (зависит от автомобиля) со стажем от 5 лет',
-  'Залог блокируется на карте водителя и возвращается в течение 3 рабочих дней',
-  'Автомобиль выдаётся с полным баком и возвращается так же',
-  'Суточный лимит пробега; перепробег — 6 € за километр',
-  'Запрещены трек-дни, дрифт и передача управления третьим лицам',
+  'Driver aged 23–30+ (depends on the car) with at least 5 years’ experience',
+  'The deposit is held on the driver’s card and released within 3 working days',
+  'The car is handed over with a full tank and returned the same way',
+  'Daily mileage limit; excess mileage — €6 per kilometre',
+  'Track days, drifting and letting third parties drive are not allowed',
 ];
 
 export const pickupTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00', '19:00', '20:00'];
 export const studioTimes = ['09:00', '10:00', '11:00', '12:00', '14:00', '15:00', '16:00', '17:00'];
 
 export const discountRules = [
-  { minDays: 7, rate: 0.15, label: 'Скидка 15% за 7+ дней' },
-  { minDays: 3, rate: 0.1, label: 'Скидка 10% за 3+ дня' },
+  { minDays: 7, rate: 0.15, label: '15% off for 7+ days' },
+  { minDays: 3, rate: 0.1, label: '10% off for 3+ days' },
 ];

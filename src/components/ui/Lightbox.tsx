@@ -20,7 +20,7 @@ interface LightboxProps {
 }
 
 /** Full-screen viewer: arrows, keyboard, swipe, Escape and focus trap via Modal. */
-export function Lightbox({ slides, index, onIndex, label = 'Просмотр фотографий' }: LightboxProps) {
+export function Lightbox({ slides, index, onIndex, label = 'Photo viewer' }: LightboxProps) {
   const start = useRef<{ x: number; y: number } | null>(null);
   const open = index !== null;
   const count = slides.length;
@@ -65,10 +65,10 @@ export function Lightbox({ slides, index, onIndex, label = 'Просмотр ф�
               {index! + 1} / {count}
             </p>
             <div className="lightbox__nav">
-              <button type="button" className="icon-btn" onClick={() => go(-1)} aria-label="Предыдущее фото">
+              <button type="button" className="icon-btn" onClick={() => go(-1)} aria-label="Previous photo">
                 <Icon name="arrowLeft" />
               </button>
-              <button type="button" className="icon-btn" onClick={() => go(1)} aria-label="Следующее фото">
+              <button type="button" className="icon-btn" onClick={() => go(1)} aria-label="Next photo">
                 <Icon name="arrow" />
               </button>
             </div>

@@ -14,18 +14,18 @@ export default function NotFound() {
           404
         </p>
         <h1 className="h2" id="nf-title">
-          Здесь пусто, как в боксе перед сменой
+          Empty, like a bay before a shift
         </h1>
-        <p className="lead">Страница переехала или её никогда не было. Проверьте адрес или выберите раздел.</p>
+        <p className="lead">The page has moved or never existed. Check the address or choose a section.</p>
         <div className="not-found__actions">
           <Link to="/" className="btn btn--primary">
-            На главную <Icon name="arrow" />
+            Home <Icon name="arrow" />
           </Link>
           <Link to="/cars/" className="btn btn--ghost">
-            Автопарк
+            Fleet
           </Link>
           <Link to="/detailing/" className="btn btn--ghost">
-            Детейлинг
+            Detailing
           </Link>
         </div>
       </div>

@@ -54,23 +54,23 @@ export default function CarPage({ slug }: { slug: string }) {
   const [lightbox, setLightbox] = useState<number | null>(null);
   const [current, setCurrent] = useState(0);
   const similar = similarCars(car);
-  const slides = car.photos.map((p, i) => ({ photo: p, caption: `${carName(car)} — фото ${i + 1} из ${car.photos.length}` }));
+  const slides = car.photos.map((p, i) => ({ photo: p, caption: `${carName(car)} — photo ${i + 1} of ${car.photos.length}` }));
 
   useEffect(() => setCurrent(0), [slug]);
 
   const specs: [string, string][] = [
-    ['Двигатель', car.engine],
-    ['Мощность', `${car.powerHp} л.с. (${car.powerKw} кВт)`],
-    ['Крутящий момент', `${formatNumber(car.torqueNm)} Н·м`],
-    ['Разгон 0–100 км/ч', `${formatDecimal(car.accel)} с`],
-    ['Максимальная скорость', `${car.topSpeed} км/ч${car.topSpeedLimited ? ', ограничена электроникой' : ''}`],
-    ['Коробка передач', car.gearbox],
-    ['Привод', driveLabels[car.drive]],
-    ['Кузов', bodyLabels[car.body]],
-    ['Мест', seats(car.seats)],
-    [car.weightNote === 'dry' ? 'Сухая масса' : 'Снаряжённая масса', `${formatNumber(car.weightKg)} кг`],
-    ['Год выпуска', String(car.year)],
-    ['Цвет', car.colour],
+    ['Engine', car.engine],
+    ['Power', `${car.powerHp} hp (${car.powerKw} kW)`],
+    ['Torque', `${formatNumber(car.torqueNm)} Nm`],
+    ['0–100 km/h', `${formatDecimal(car.accel)} s`],
+    ['Top speed', `${car.topSpeed} km/h${car.topSpeedLimited ? ', electronically limited' : ''}`],
+    ['Transmission', car.gearbox],
+    ['Drive', driveLabels[car.drive]],
+    ['Body', bodyLabels[car.body]],
+    ['Seats', seats(car.seats)],
+    [car.weightNote === 'dry' ? 'Dry weight' : 'Kerb weight', `${formatNumber(car.weightKg)} kg`],
+    ['Model year', String(car.year)],
+    ['Colour', car.colour],
   ];
 
   return (
@@ -81,7 +81,7 @@ export default function CarPage({ slug }: { slug: string }) {
         </div>
         <div className="car-hero__shade" aria-hidden="true" />
         <div className="wrap car-hero__content">
-          <Breadcrumbs items={[{ to: '/cars/', label: 'Автопарк' }, { label: carName(car) }]} />
+          <Breadcrumbs items={[{ to: '/cars/', label: 'Fleet' }, { label: carName(car) }]} />
           <p className="car-hero__brand">
             {car.brand}
             <span>{car.year}</span>
@@ -91,31 +91,31 @@ export default function CarPage({ slug }: { slug: string }) {
           <div className="car-hero__bar">
             <p className="car-hero__price">
               <span className="numeral">{formatPrice(car.pricePerDay)}</span>
-              <span className="caption">в сутки, залог {formatPrice(car.deposit)}</span>
+              <span className="caption">per day, deposit {formatPrice(car.deposit)}</span>
             </p>
             <a href="#booking" className="btn btn--primary">
-              Забронировать <Icon name="arrow" />
+              Book <Icon name="arrow" />
             </a>
             <a href="#gallery" className="btn btn--ghost">
-              Фотографии
+              Photos
             </a>
           </div>
         </div>
       </header>
 
-      <section className="readouts" aria-label="Ключевые характеристики">
+      <section className="readouts" aria-label="Key specifications">
         <dl className="wrap readouts__grid">
-          <Readout value={car.powerHp} unit="л.с." label="Мощность" />
-          <Readout value={car.accel} decimals={1} unit="с" label="0–100 км/ч" />
-          <Readout value={car.topSpeed} unit="км/ч" label="Максимальная скорость" />
-          <Readout value={car.torqueNm} unit="Н·м" label="Крутящий момент" />
+          <Readout value={car.powerHp} unit="hp" label="Power" />
+          <Readout value={car.accel} decimals={1} unit="s" label="0–100 km/h" />
+          <Readout value={car.topSpeed} unit="km/h" label="Top speed" />
+          <Readout value={car.torqueNm} unit="Nm" label="Torque" />
         </dl>
       </section>
 
       <section className="section car-about">
         <div className="wrap car-about__grid">
           <div className="prose" data-reveal="up">
-            <h2 className="h3">Об автомобиле</h2>
+            <h2 className="h3">About the car</h2>
             {car.description.map((p) => (
               <p key={p}>{p}</p>
             ))}
@@ -130,7 +130,7 @@ export default function CarPage({ slug }: { slug: string }) {
             </ul>
           </div>
           <div data-reveal="up" style={{ '--d': 120 } as React.CSSProperties}>
-            <h2 className="h4 spec-title">Технические характеристики</h2>
+            <h2 className="h4 spec-title">Technical specifications</h2>
             <dl className="spec-sheet">
               {specs.map(([k, v]) => (
                 <div key={k}>
@@ -139,7 +139,7 @@ export default function CarPage({ slug }: { slug: string }) {
                 </div>
               ))}
             </dl>
-            <p className="caption">Данные производителя. Цена и наличие автомобиля в Example — демонстрационные.</p>
+            <p className="caption">Manufacturer data. Price and availability at Example are for demonstration only.</p>
           </div>
         </div>
       </section>
@@ -147,19 +147,19 @@ export default function CarPage({ slug }: { slug: string }) {
       <section className="section--tight car-gallery" id="gallery" aria-labelledby="car-gallery-title">
         <div className="wrap">
           <h2 className="h3" id="car-gallery-title">
-            Галерея
+            Gallery
           </h2>
           <div className="viewer">
-            <button type="button" className="viewer__main" onClick={() => setLightbox(current)} aria-label="Открыть фото на весь экран">
+            <button type="button" className="viewer__main" onClick={() => setLightbox(current)} aria-label="Open photo full screen">
               <Photo key={car.photos[current]} k={car.photos[current]} ratio={16 / 9} sizes="(min-width: 1100px) 80vw, 100vw" />
               <span className="viewer__expand">
-                <Icon name="expand" /> На весь экран
+                <Icon name="expand" /> Full screen
               </span>
             </button>
             {car.photos.length > 1 ? (
-              <div className="viewer__thumbs" role="tablist" aria-label="Фотографии автомобиля">
+              <div className="viewer__thumbs" role="tablist" aria-label="Car photos">
                 {car.photos.map((p, i) => (
-                  <button key={p} type="button" role="tab" aria-selected={current === i} className={current === i ? 'is-active' : ''} onClick={() => setCurrent(i)} aria-label={`Фото ${i + 1}`}>
+                  <button key={p} type="button" role="tab" aria-selected={current === i} className={current === i ? 'is-active' : ''} onClick={() => setCurrent(i)} aria-label={`Photo ${i + 1}`}>
                     <Photo k={p} ratio={16 / 10} sizes="200px" maxWidth={480} />
                   </button>
                 ))}
@@ -167,31 +167,31 @@ export default function CarPage({ slug }: { slug: string }) {
             ) : null}
           </div>
         </div>
-        <Lightbox slides={slides} index={lightbox} onIndex={setLightbox} label={`Фотографии ${carName(car)}`} />
+        <Lightbox slides={slides} index={lightbox} onIndex={setLightbox} label={`Photos ${carName(car)}`} />
       </section>
 
       <section className="section car-terms" aria-labelledby="car-terms-title">
         <div className="wrap car-terms__grid">
           <div>
             <h2 className="h3" id="car-terms-title">
-              Стоимость и условия
+              Price and terms
             </h2>
             <table className="rate-table">
-              <caption className="visually-hidden">Стоимость аренды {carName(car)}</caption>
+              <caption className="visually-hidden">Rental price {carName(car)}</caption>
               <thead>
                 <tr>
-                  <th scope="col">Срок</th>
-                  <th scope="col">В сутки</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Per day</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>1–2 дня</td>
+                  <td>1–2 days</td>
                   <td>{formatPrice(car.pricePerDay)}</td>
                 </tr>
                 {[...discountRules].reverse().map((r) => (
                   <tr key={r.minDays}>
-                    <td>от {days(r.minDays)}</td>
+                    <td>from {days(r.minDays)}</td>
                     <td>
                       {formatPrice(car.pricePerDay * (1 - r.rate))} <span className="caption">−{Math.round(r.rate * 100)}%</span>
                     </td>
@@ -201,21 +201,21 @@ export default function CarPage({ slug }: { slug: string }) {
             </table>
             <dl className="terms-facts">
               <div>
-                <dt>Залог</dt>
+                <dt>Deposit</dt>
                 <dd>{formatPrice(car.deposit)}</dd>
               </div>
               <div>
-                <dt>Возраст водителя</dt>
-                <dd>от {car.minAge} лет</dd>
+                <dt>Driver age</dt>
+                <dd>{car.minAge}+</dd>
               </div>
               <div>
-                <dt>Пробег в сутки</dt>
-                <dd>{car.mileagePerDay} км</dd>
+                <dt>Mileage per day</dt>
+                <dd>{car.mileagePerDay} km</dd>
               </div>
             </dl>
           </div>
           <div>
-            <h3 className="h4">Условия аренды</h3>
+            <h3 className="h4">Rental terms</h3>
             <ul className="check-list">
               {rentalTerms.map((t) => (
                 <li key={t}>
@@ -223,20 +223,20 @@ export default function CarPage({ slug }: { slug: string }) {
                 </li>
               ))}
             </ul>
-            <h3 className="h4 car-terms__extras-title">Дополнительные услуги</h3>
+            <h3 className="h4 car-terms__extras-title">Extras</h3>
             <ul className="extras-list">
               {rentalExtras.map((x) => (
                 <li key={x.id}>
                   <span>{x.label}</span>
                   <span>
                     {formatPrice(x.price)}
-                    {x.per === 'day' ? ' / сутки' : ''}
+                    {x.per === 'day' ? ' / day' : ''}
                   </span>
                 </li>
               ))}
             </ul>
             <Link to="/terms/" className="text-link">
-              Полные условия аренды <Icon name="arrow" />
+              Full rental terms <Icon name="arrow" />
             </Link>
           </div>
         </div>
@@ -245,8 +245,8 @@ export default function CarPage({ slug }: { slug: string }) {
       <section className="section car-booking" id="booking" aria-labelledby="car-booking-title">
         <div className="wrap">
           <div className="section-head">
-            <Split id="car-booking-title" lines={['Забронировать', carName(car)]} className="h2" />
-            <p className="lead">Выберите даты в календаре — стоимость с учётом скидок и дополнительных услуг посчитается сразу.</p>
+            <Split id="car-booking-title" lines={['Book', carName(car)]} className="h2" />
+            <p className="lead">Choose dates in the calendar — the price with discounts and extras is calculated instantly.</p>
           </div>
           <RentalForm key={car.slug} initialCar={car.slug} fixedCar initialStart={params.get('from')} initialEnd={params.get('to')} />
         </div>
@@ -255,9 +255,9 @@ export default function CarPage({ slug }: { slug: string }) {
       <section className="section similar" aria-labelledby="similar-title">
         <div className="wrap">
           <div className="section-head">
-            <Split id="similar-title" lines={['Похожие', 'автомобили']} className="h2" />
+            <Split id="similar-title" lines={['Similar', 'cars']} className="h2" />
             <Link to="/cars/" className="text-link">
-              Весь автопарк <Icon name="arrow" />
+              The whole fleet <Icon name="arrow" />
             </Link>
           </div>
           <div className="cars-grid cars-grid--three">

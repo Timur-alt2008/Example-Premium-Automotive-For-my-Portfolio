@@ -8,16 +8,16 @@ export function Intro() {
     <section className="intro section" id="intro" aria-labelledby="intro-title">
       <div className="wrap intro__grid">
         <h2 className="visually-hidden" id="intro-title">
-          О компании
+          About the company
         </h2>
         <p className="intro__statement" data-reveal="up">
-          Example начинался с двух постов и одной полировальной машинки. Сегодня это студия на 1 400 м² и четырнадцать автомобилей, которых готовят те же мастера, что работают с машинами клиентов.
+          Example started with two bays and a single polisher. Today it is a 1,400 m² studio and fourteen cars, prepared by the same specialists who work on our clients’ cars.
         </p>
         <div className="intro__side" data-reveal="up" style={{ '--d': 150 } as React.CSSProperties}>
           <Photo k="wheel-light" ratio={4 / 5} sizes="(min-width: 900px) 28vw, 80vw" maxWidth={1080} />
-          <p className="small muted">Поэтому арендованный Huracán выглядит так же, как машина после нашей полировки: это одна и та же работа и один и тот же стандарт.</p>
+          <p className="small muted">That is why a rented Huracán looks just like a car after our polishing: it is the same work and the same standard.</p>
           <Link to="/about/" className="text-link">
-            О студии и команде <Icon name="arrow" />
+            About the studio and team <Icon name="arrow" />
           </Link>
         </div>
         <dl className="intro__facts">

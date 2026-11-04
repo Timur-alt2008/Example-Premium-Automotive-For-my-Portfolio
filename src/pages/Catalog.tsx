@@ -34,35 +34,35 @@ export default function Catalog() {
 
   return (
     <>
-      <PageHero crumbs={[{ label: 'Автопарк' }]} title={['Автопарк']} lead="Четырнадцать автомобилей: от открытого 911 для побережья до Cullinan для семейного выезда. Наличие подтверждает менеджер после заявки." />
+      <PageHero crumbs={[{ label: 'Fleet' }]} title={['Fleet']} lead="Fourteen cars: from an open-top 911 for the coast to a Cullinan for a family trip. Availability is confirmed by a manager after your request." />
 
-      <section className="catalog section--tight" aria-label="Каталог автомобилей">
+      <section className="catalog section--tight" aria-label="Car catalog">
         <div className="wrap">
           <Segmented
-            label="Категория"
+            label="Category"
             value={category}
             onChange={(c) => setParams({ category: c === 'all' ? null : c })}
-            options={[{ value: 'all' as const, label: 'Все', count: cars.length }, ...categoryKeys.map((c) => ({ value: c, label: categoryLabels[c], count: cars.filter((car) => car.categories.includes(c)).length }))]}
+            options={[{ value: 'all' as const, label: 'All', count: cars.length }, ...categoryKeys.map((c) => ({ value: c, label: categoryLabels[c], count: cars.filter((car) => car.categories.includes(c)).length }))]}
             className="catalog__categories"
           />
           {category !== 'all' ? <p className="catalog__category-note muted">{categoryNotes[category]}</p> : null}
 
           <div className="catalog__layout">
-            <aside className="catalog__sidebar" aria-label="Фильтры">
+            <aside className="catalog__sidebar" aria-label="Filters">
               <Filters value={filters} onChange={setFilters} onReset={resetFiltersOnly} />
             </aside>
 
             <div className="catalog__main">
               <div className="catalog__toolbar">
                 <p className="catalog__count" aria-live="polite" data-testid="result-count">
-                  {result.length} {plural(result.length, ['автомобиль', 'автомобиля', 'автомобилей'])}
+                  {result.length} {plural(result.length, ['car', 'cars', 'cars'])}
                 </p>
                 <button type="button" className="btn btn--ghost btn--small catalog__filters-btn" onClick={() => setDrawer(true)} aria-haspopup="dialog">
-                  <Icon name="filter" /> Фильтры{active ? <span className="badge">{active}</span> : null}
+                  <Icon name="filter" /> Filters{active ? <span className="badge">{active}</span> : null}
                 </button>
                 <label className="sort">
-                  <span className="visually-hidden">Сортировка</span>
-                  <select value={sort} onChange={(e) => setParams({ sort: e.target.value === 'popular' ? null : e.target.value })} aria-label="Сортировка">
+                  <span className="visually-hidden">Sort</span>
+                  <select value={sort} onChange={(e) => setParams({ sort: e.target.value === 'popular' ? null : e.target.value })} aria-label="Sort">
                     {(Object.keys(sortLabels) as SortKey[]).map((k) => (
                       <option key={k} value={k}>
                         {sortLabels[k]}
@@ -82,10 +82,10 @@ export default function Catalog() {
               ) : (
                 <div className="empty" data-testid="empty-state">
                   <Icon name="search" />
-                  <h2 className="h3">По этим параметрам автомобилей нет</h2>
-                  <p className="muted">Попробуйте расширить диапазон цены или убрать часть фильтров. Мы также можем привезти автомобиль под заказ — напишите нам.</p>
+                  <h2 className="h3">No cars match these filters</h2>
+                  <p className="muted">Try widening the price range or removing some filters. We can also source a car to order — write to us.</p>
                   <button type="button" className="btn btn--primary" onClick={reset}>
-                    Сбросить все фильтры
+                    Reset all filters
                   </button>
                 </div>
               )}
@@ -94,12 +94,12 @@ export default function Catalog() {
         </div>
       </section>
 
-      <Modal open={drawer} onClose={() => setDrawer(false)} label="Фильтры автопарка" variant="sheet">
+      <Modal open={drawer} onClose={() => setDrawer(false)} label="Fleet filters" variant="sheet">
         <div className="drawer">
-          <p className="h3">Фильтры</p>
+          <p className="h3">Filters</p>
           <Filters value={filters} onChange={setFilters} onReset={resetFiltersOnly} />
           <button type="button" className="btn btn--primary btn--block drawer__apply" onClick={() => setDrawer(false)}>
-            Показать {result.length} {plural(result.length, ['автомобиль', 'автомобиля', 'автомобилей'])}
+            Show {result.length} {plural(result.length, ['car', 'cars', 'cars'])}
           </button>
         </div>
       </Modal>

@@ -3,37 +3,33 @@
  * browser produce byte-identical strings (ICU versions differ in spaces and abbreviations).
  */
 
-const NBSP = ' ';
+const NBSP = '\u00a0';
 
 export function formatNumber(value: number): string {
   const sign = value < 0 ? '-' : '';
   const digits = String(Math.round(Math.abs(value)));
-  return sign + digits.replace(/\B(?=(\d{3})+(?!\d))/g, NBSP);
+  return sign + digits.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
 
-export const formatPrice = (value: number): string => `${formatNumber(value)}${NBSP}€`;
+export const formatPrice = (value: number): string => `${value < 0 ? '-' : ''}€${formatNumber(Math.abs(value))}`;
 
-export const formatDecimal = (value: number): string => value.toFixed(1).replace('.', ',');
+export const formatDecimal = (value: number): string => value.toFixed(1);
 
-/** Russian plural: plural(5, ['день', 'дня', 'дней']) → «дней» */
+/** English plural. The tuple keeps the [one, few, many] shape; only one/other are used. */
 export function plural(n: number, forms: [string, string, string]): string {
-  const mod10 = n % 10;
-  const mod100 = n % 100;
-  if (mod10 === 1 && mod100 !== 11) return forms[0];
-  if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return forms[1];
-  return forms[2];
+  return n === 1 ? forms[0] : forms[2];
 }
 
-export const days = (n: number) => `${n}${NBSP}${plural(n, ['день', 'дня', 'дней'])}`;
-export const seats = (n: number) => `${n}${NBSP}${plural(n, ['место', 'места', 'мест'])}`;
+export const days = (n: number) => `${n}${NBSP}${plural(n, ['day', 'days', 'days'])}`;
+export const seats = (n: number) => `${n}${NBSP}${plural(n, ['seat', 'seats', 'seats'])}`;
 
-const MONTHS_GENITIVE = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-const WEEKDAYS_SHORT = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+const MONTHS_LONG = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+const WEEKDAYS_SHORT = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
-/** Accepts an ISO date (yyyy-mm-dd). «14 сентября 2026» or «пн, 14 сентября». */
+/** Accepts an ISO date (yyyy-mm-dd). “14 September 2026” or “Mon, 14 September”. */
 export function formatDate(iso: string, style: 'long' | 'short' = 'long'): string {
   const [y, m, d] = iso.split('-').map(Number);
-  if (style === 'long') return `${d}${NBSP}${MONTHS_GENITIVE[m - 1]} ${y}`;
+  if (style === 'long') return `${d}${NBSP}${MONTHS_LONG[m - 1]} ${y}`;
   const weekday = WEEKDAYS_SHORT[new Date(y, m - 1, d).getDay()];
-  return `${weekday}, ${d}${NBSP}${MONTHS_GENITIVE[m - 1]}`;
+  return `${weekday}, ${d}${NBSP}${MONTHS_LONG[m - 1]}`;
 }

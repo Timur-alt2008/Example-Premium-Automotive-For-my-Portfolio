@@ -21,33 +21,33 @@ export default function ServicePage({ slug }: { slug: string }) {
         </div>
         <div className="service-hero__shade" aria-hidden="true" />
         <div className="wrap service-hero__content">
-          <Breadcrumbs items={[{ to: '/detailing/', label: 'Детейлинг' }, { label: service.name }]} />
+          <Breadcrumbs items={[{ to: '/detailing/', label: 'Detailing' }, { label: service.name }]} />
           <p className="caption service-hero__group">{groupLabels[service.group]}</p>
           <Split as="h1" lines={[service.name]} className="h1 service-hero__title" />
           <p className="lead">{service.summary}</p>
           <dl className="service-hero__facts">
             <div>
-              <dt>Время работы</dt>
+              <dt>Opening hours</dt>
               <dd>{service.duration}</dd>
             </div>
             <div>
-              <dt>Стоимость</dt>
+              <dt>Price</dt>
               <dd>
-                {service.variablePrice ? 'от ' : ''}
+                {service.variablePrice ? 'from ' : ''}
                 {formatPrice(service.priceFrom)}
               </dd>
             </div>
             <div>
-              <dt>Результат</dt>
+              <dt>Result</dt>
               <dd>{service.result}</dd>
             </div>
           </dl>
           <div className="service-hero__actions">
             <Link to={`/booking/?type=detailing&service=${service.slug}`} className="btn btn--primary">
-              Записаться на услугу <Icon name="arrow" />
+              Book a service <Icon name="arrow" />
             </Link>
             <Link to="/detailing/" className="btn btn--ghost">
-              Все услуги
+              All services
             </Link>
           </div>
         </div>
@@ -56,13 +56,13 @@ export default function ServicePage({ slug }: { slug: string }) {
       <section className="section service-body">
         <div className="wrap service-body__grid">
           <div className="prose" data-reveal="up">
-            <h2 className="h3">Как мы это делаем</h2>
+            <h2 className="h3">How we do it</h2>
             {service.description.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
           <div className="service-body__includes" data-reveal="up" style={{ '--d': 120 } as React.CSSProperties}>
-            <h2 className="h4">Что входит</h2>
+            <h2 className="h4">What’s included</h2>
             <ul className="check-list">
               {service.includes.map((item) => (
                 <li key={item}>
@@ -72,9 +72,9 @@ export default function ServicePage({ slug }: { slug: string }) {
             </ul>
             {inPackages.length ? (
               <p className="small muted">
-                Входит в пакеты: {inPackages.map((p) => p.name).join(', ')}.{' '}
+                Included in packages: {inPackages.map((p) => p.name).join(', ')}.{' '}
                 <Link to="/detailing/#packages" className="text-link">
-                  Сравнить
+                  Compare
                 </Link>
               </p>
             ) : null}
@@ -85,7 +85,7 @@ export default function ServicePage({ slug }: { slug: string }) {
       <section className="section--tight service-steps" aria-labelledby="service-steps-title">
         <div className="wrap">
           <h2 className="h3" id="service-steps-title">
-            Порядок работы
+            How it works
           </h2>
           <ol className="mini-steps">
             {processSteps.map((s, i) => (
@@ -103,7 +103,7 @@ export default function ServicePage({ slug }: { slug: string }) {
         <section className="section related" aria-labelledby="related-title">
           <div className="wrap">
             <div className="section-head">
-              <Split id="related-title" lines={['Часто заказывают', 'вместе']} className="h2" />
+              <Split id="related-title" lines={['Often booked', 'together']} className="h2" />
             </div>
             <div className="services-grid">
               {related.map((s) => (

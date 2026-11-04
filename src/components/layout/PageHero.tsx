@@ -11,10 +11,10 @@ export interface Crumb {
 
 export function Breadcrumbs({ items }: { items: Crumb[] }) {
   return (
-    <nav className="crumbs" aria-label="Навигационная цепочка">
+    <nav className="crumbs" aria-label="Breadcrumbs">
       <ol>
         <li>
-          <Link to="/">Главная</Link>
+          <Link to="/">Home</Link>
         </li>
         {items.map((c) => (
           <li key={c.label}>{c.to ? <Link to={c.to}>{c.label}</Link> : <span aria-current="page">{c.label}</span>}</li>

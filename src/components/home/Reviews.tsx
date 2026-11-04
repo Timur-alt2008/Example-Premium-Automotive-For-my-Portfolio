@@ -21,12 +21,12 @@ export function Reviews() {
   };
 
   return (
-    <section className="section reviews" aria-labelledby="reviews-title" aria-roledescription="карусель">
+    <section className="section reviews" aria-labelledby="reviews-title" aria-roledescription="carousel">
       <div className="wrap">
         <div className="section-head">
-          <Split id="reviews-title" lines={['Что говорят', 'после выдачи']} className="h2" />
+          <Split id="reviews-title" lines={['What clients say', 'after handover']} className="h2" />
           <p className="caption reviews__note" data-reveal="up">
-            Демонстрационные отзывы: авторы и тексты вымышлены и показывают, как будет выглядеть раздел.
+            Demonstration reviews: the authors and texts are fictional and show how this section will look.
           </p>
         </div>
         <div className="reviews__stage" onPointerDown={onDown} onPointerUp={onUp}>
@@ -38,7 +38,7 @@ export function Reviews() {
             ))}
           </div>
           <figure className="review" key={index} aria-live="polite">
-            <div className="review__rating" role="img" aria-label={`Оценка ${review.rating} из 5`}>
+            <div className="review__rating" role="img" aria-label={`Rating ${review.rating} out of 5`}>
               {Array.from({ length: 5 }, (_, i) => (
                 <Icon key={i} name="star" className={i < review.rating ? 'is-on' : ''} />
               ))}
@@ -55,15 +55,15 @@ export function Reviews() {
             </figcaption>
           </figure>
           <div className="reviews__controls">
-            <button type="button" className="icon-btn" onClick={() => go(-1)} aria-label="Предыдущий отзыв">
+            <button type="button" className="icon-btn" onClick={() => go(-1)} aria-label="Previous review">
               <Icon name="arrowLeft" />
             </button>
             <div className="reviews__dots">
               {reviews.map((r, i) => (
-                <button key={r.author} type="button" className={i === index ? 'is-active' : ''} onClick={() => setIndex(i)} aria-label={`Отзыв ${i + 1} из ${count}`} aria-current={i === index} />
+                <button key={r.author} type="button" className={i === index ? 'is-active' : ''} onClick={() => setIndex(i)} aria-label={`Review ${i + 1} of ${count}`} aria-current={i === index} />
               ))}
             </div>
-            <button type="button" className="icon-btn" onClick={() => go(1)} aria-label="Следующий отзыв">
+            <button type="button" className="icon-btn" onClick={() => go(1)} aria-label="Next review">
               <Icon name="arrow" />
             </button>
           </div>

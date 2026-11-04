@@ -46,15 +46,15 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
 
   const errors = useMemo(() => {
     const e: Partial<Record<ErrorKey, string>> = {};
-    if (!service && !chosenPackage) e.work = 'Выберите услугу или пакет обслуживания';
-    e.brand = required(brand, 'Укажите марку автомобиля');
-    e.model = required(model, 'Укажите модель');
-    if (!date) e.date = 'Выберите дату визита';
-    if (!time) e.time = 'Выберите удобное время';
+    if (!service && !chosenPackage) e.work = 'Choose a service or a care package';
+    e.brand = required(brand, 'Enter the car make');
+    e.model = required(model, 'Enter the model');
+    if (!date) e.date = 'Choose a visit date';
+    if (!time) e.time = 'Choose a convenient time';
     e.name = validateName(contact.name);
     e.phone = validatePhone(contact.phone);
     e.email = validateEmail(contact.email);
-    if (!consent) e.consent = 'Нужно согласие на обработку данных';
+    if (!consent) e.consent = 'Consent to data processing is required';
     return e;
   }, [service, chosenPackage, brand, model, date, time, contact, consent]);
 
@@ -77,10 +77,10 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
         total: estimate,
         contact,
         lines: [
-          ['Работы', work],
-          ['Автомобиль', `${brand.trim()} ${model.trim()} (${vehicleSizeLabels[size].toLowerCase()})`],
-          ['Визит', `${formatDate(date!)} в ${time}`],
-          ...(comment.trim() ? ([['Комментарий', comment.trim()]] as [string, string][]) : []),
+          ['Work', work],
+          ['Car', `${brand.trim()} ${model.trim()} (${vehicleSizeLabels[size].toLowerCase()})`],
+          ['Visit', `${formatDate(date!)} at ${time}`],
+          ...(comment.trim() ? ([['Comment', comment.trim()]] as [string, string][]) : []),
         ],
       });
       navigate(`/booking/success/?n=${request.number}`);
@@ -88,7 +88,7 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
       if (err instanceof SubmitError) {
         setStatus('error');
         setErrorText(err.message);
-        toast('Заявка не отправлена', 'error');
+        toast('Request not sent', 'error');
       } else {
         navigate('/booking/error/?type=detailing');
       }
@@ -98,21 +98,21 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
   const byGroup = (['exterior', 'interior'] as const).map((g) => ({ group: g, items: services.filter((s) => s.group === g) }));
 
   return (
-    <form className="booking-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Запись на детейлинг" data-testid="detailing-form">
+    <form className="booking-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Detailing appointment" data-testid="detailing-form">
       <div className="booking-form__main">
-        <FormStep index={1} title="Услуга и пакет">
+        <FormStep index={1} title="Service and package">
           <div className={['select-group', show('work') ? 'has-error' : ''].join(' ')}>
             <label className="field__label" htmlFor="service-select">
-              Услуга
+              Service
             </label>
             <div className="select">
               <select id="service-select" className="field__control" value={serviceSlug} onChange={(e) => setServiceSlug(e.target.value)} aria-invalid={show('work') ? true : undefined}>
-                <option value="">Без отдельной услуги</option>
+                <option value="">No separate service</option>
                 {byGroup.map(({ group, items }) => (
                   <optgroup key={group} label={groupLabels[group]}>
                     {items.map((s) => (
                       <option key={s.slug} value={s.slug}>
-                        {s.name} — {s.variablePrice ? 'от ' : ''}
+                        {s.name} — {s.variablePrice ? 'from ' : ''}
                         {formatPrice(s.priceFrom)}
                       </option>
                     ))}
@@ -122,8 +122,8 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
               <Icon name="chevronDown" />
             </div>
           </div>
-          <div className="package-pick" role="radiogroup" aria-label="Пакет обслуживания">
-            {[{ id: 'none' as const, name: 'Без пакета', pitch: 'Только выбранная услуга' }, ...packages].map((p) => (
+          <div className="package-pick" role="radiogroup" aria-label="Care package">
+            {[{ id: 'none' as const, name: 'No package', pitch: 'Selected service only' }, ...packages].map((p) => (
               <button key={p.id} type="button" role="radio" aria-checked={pkg === p.id} className={['package-pick__item', pkg === p.id ? 'is-active' : ''].join(' ')} onClick={() => setPkg(p.id)}>
                 <span className="package-pick__name">{p.name}</span>
                 <span className="caption">{'price' in p ? `${formatPrice(p.price[size])}, ${p.duration}` : p.pitch}</span>
@@ -137,29 +137,29 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
           ) : null}
         </FormStep>
 
-        <FormStep index={2} title="Автомобиль">
-          <Segmented label="Тип кузова" value={size} onChange={setSize} options={(Object.keys(vehicleSizeLabels) as VehicleSize[]).map((v) => ({ value: v, label: vehicleSizeLabels[v] }))} />
+        <FormStep index={2} title="Car">
+          <Segmented label="Body type" value={size} onChange={setSize} options={(Object.keys(vehicleSizeLabels) as VehicleSize[]).map((v) => ({ value: v, label: vehicleSizeLabels[v] }))} />
           <div className="form-grid">
-            <TextField label="Марка" name="brand" list="brand-list" placeholder="Например, Porsche" value={brand} error={show('brand')} onChange={(e) => setBrand(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, brand: true }))} />
+            <TextField label="Make" name="brand" list="brand-list" placeholder="For example, Porsche" value={brand} error={show('brand')} onChange={(e) => setBrand(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, brand: true }))} />
             <datalist id="brand-list">
               {[...brands, 'Aston Martin', 'BMW', 'Maserati', 'Range Rover', 'Tesla'].sort().map((b) => (
                 <option key={b} value={b} />
               ))}
             </datalist>
-            <TextField label="Модель" name="model" placeholder="Например, 911 Carrera" value={model} error={show('model')} onChange={(e) => setModel(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, model: true }))} />
+            <TextField label="Model" name="model" placeholder="For example, 911 Carrera" value={model} error={show('model')} onChange={(e) => setModel(e.target.value)} onBlur={() => setTouched((t) => ({ ...t, model: true }))} />
           </div>
         </FormStep>
 
-        <FormStep index={3} title="Дата и время визита">
+        <FormStep index={3} title="Visit date and time">
           <div className={['dates', show('date') ? 'has-error' : ''].join(' ')}>
             <div className="dates__summary dates__summary--single" aria-live="polite">
               <div className={!date ? 'is-pending' : ''}>
-                <span className="caption">Дата визита</span>
-                <span>{date ? formatDate(date) : 'Выберите в календаре'}</span>
+                <span className="caption">Visit date</span>
+                <span>{date ? formatDate(date) : 'Choose in the calendar'}</span>
               </div>
             </div>
             {mounted ? (
-              <Calendar mode="single" label="Дата визита" start={date} min={min} max={max} onChange={(d) => setDate(d)} />
+              <Calendar mode="single" label="Visit date" start={date} min={min} max={max} onChange={(d) => setDate(d)} />
             ) : (
               <div className="calendar calendar--placeholder" aria-hidden="true" />
             )}
@@ -171,7 +171,7 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
           </div>
           <div className={['time-slots', show('time') ? 'has-error' : ''].join(' ')}>
             <p className="field__label" id="studio-time-label">
-              Время
+              Time
             </p>
             <div className="slots" role="radiogroup" aria-labelledby="studio-time-label">
               {studioTimes
@@ -190,23 +190,23 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
           </div>
         </FormStep>
 
-        <FormStep index={4} title="Контакты">
+        <FormStep index={4} title="Contacts">
           <ContactFields values={contact} errors={contactErrors} onChange={(k, v) => setContact((c) => ({ ...c, [k]: v }))} onBlur={(k) => setTouched((t) => ({ ...t, [k]: true }))} />
-          <TextArea label="Комментарий" name="comment" optional placeholder="Известные повреждения, пожелания по времени выдачи" value={comment} onChange={(e) => setComment(e.target.value)} />
+          <TextArea label="Comment" name="comment" optional placeholder="Known damage, preferred handover time" value={comment} onChange={(e) => setComment(e.target.value)} />
           <Consent checked={consent} onChange={setConsent} error={show('consent')} />
         </FormStep>
       </div>
 
-      <aside className="booking-form__summary" aria-label="Предварительная стоимость">
+      <aside className="booking-form__summary" aria-label="Estimated price">
         <div className="summary" data-testid="detailing-summary">
-          <p className="summary__title">Предварительная стоимость</p>
+          <p className="summary__title">Estimated price</p>
           {service || chosenPackage ? (
             <dl className="summary__lines">
               {service ? (
                 <div>
                   <dt>{service.name}</dt>
                   <dd>
-                    {service.variablePrice ? 'от ' : ''}
+                    {service.variablePrice ? 'from ' : ''}
                     {formatPrice(service.priceFrom)}
                   </dd>
                 </div>
@@ -220,17 +220,17 @@ export function DetailingForm({ initialService = '', initialPackage = '' }: { in
                 </div>
               ) : null}
               <div className="summary__total">
-                <dt>Ориентировочно</dt>
+                <dt>Approximately</dt>
                 <dd data-testid="detailing-total">{formatPrice(estimate)}</dd>
               </div>
             </dl>
           ) : (
-            <p className="summary__empty">Выберите услугу или пакет — стоимость появится здесь.</p>
+            <p className="summary__empty">Choose a service or a package — the price will appear here.</p>
           )}
-          <p className="caption">Точную стоимость мастер называет после осмотра лака и замера толщины покрытия.</p>
+          <p className="caption">The exact price is given after the paint has been inspected and its thickness measured.</p>
           {status === 'error' ? <ErrorBanner message={errorText} onRetry={() => form.current?.requestSubmit()} /> : null}
-          <SubmitButton sending={status === 'sending'} label="Записаться" />
-          <DemoNote>Демонстрационная запись: данные сохраняются только в вашем браузере и никуда не отправляются.</DemoNote>
+          <SubmitButton sending={status === 'sending'} label="Book" />
+          <DemoNote>Demonstration appointment: your data stays in your browser and is not sent anywhere.</DemoNote>
         </div>
       </aside>
     </form>

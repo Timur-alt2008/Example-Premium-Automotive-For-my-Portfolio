@@ -80,10 +80,10 @@ export function Calendar({ mode, start, end = null, min, max, onChange, isDisabl
   return (
     <div className={`calendar calendar--${months}`} aria-label={label} role="group">
       <div className="calendar__nav">
-        <button type="button" className="calendar__arrow" onClick={() => shift(-1)} disabled={!canPrev} aria-label="Предыдущий месяц">
+        <button type="button" className="calendar__arrow" onClick={() => shift(-1)} disabled={!canPrev} aria-label="Previous month">
           <Icon name="chevronLeft" />
         </button>
-        <button type="button" className="calendar__arrow" onClick={() => shift(1)} disabled={!canNext} aria-label="Следующий месяц">
+        <button type="button" className="calendar__arrow" onClick={() => shift(1)} disabled={!canNext} aria-label="Next month">
           <Icon name="chevronRight" />
         </button>
       </div>
@@ -115,7 +115,7 @@ export function Calendar({ mode, start, end = null, min, max, onChange, isDisabl
                     disabled={disabled}
                     tabIndex={iso === focus ? 0 : -1}
                     aria-pressed={isStart || isEnd}
-                    aria-label={`${Number(iso.slice(8))} ${MONTHS[panel.m].toLowerCase()}${disabled ? ', недоступно' : ''}`}
+                    aria-label={`${Number(iso.slice(8))} ${MONTHS[panel.m]}${disabled ? ', unavailable' : ''}`}
                     onClick={() => pick(iso)}
                     onMouseEnter={() => setHover(iso)}
                     onFocus={() => setFocus(iso)}

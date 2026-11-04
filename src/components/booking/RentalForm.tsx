@@ -52,16 +52,16 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
 
   const errors = useMemo(() => {
     const e: Partial<Record<ErrorKey, string>> = {};
-    if (!car) e.car = 'Выберите автомобиль';
-    if (!start) e.dates = 'Выберите дату получения';
-    else if (!end) e.dates = 'Выберите дату возврата';
-    else if (end <= start) e.dates = 'Дата возврата должна быть позже даты получения';
-    else if (start < min) e.dates = 'Получение возможно не раньше завтрашнего дня';
-    if (!time) e.time = 'Выберите время получения';
+    if (!car) e.car = 'Choose a car';
+    if (!start) e.dates = 'Choose a pick-up date';
+    else if (!end) e.dates = 'Choose a return date';
+    else if (end <= start) e.dates = 'The return date must be after the pick-up date';
+    else if (start < min) e.dates = 'Pick-up is possible from tomorrow at the earliest';
+    if (!time) e.time = 'Choose a pick-up time';
     e.name = validateName(contact.name);
     e.phone = validatePhone(contact.phone);
     e.email = validateEmail(contact.email);
-    if (!consent) e.consent = 'Нужно согласие на обработку данных';
+    if (!consent) e.consent = 'Consent to data processing is required';
     return e;
   }, [car, start, end, time, contact, consent, min]);
 
@@ -85,13 +85,13 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
         total: quote.total,
         contact,
         lines: [
-          ['Автомобиль', `${carName(car)}, ${car.year}`],
-          ['Получение', `${formatDate(start!)} в ${time}`],
-          ['Возврат', formatDate(end!)],
-          ['Срок', daysLabel(quote.days)],
-          ['Дополнительно', quote.extras.length ? quote.extras.map((x) => x.extra.label).join(', ') : 'Нет'],
-          ['Залог', formatPrice(quote.deposit)],
-          ...(comment.trim() ? ([['Пожелания', comment.trim()]] as [string, string][]) : []),
+          ['Car', `${carName(car)}, ${car.year}`],
+          ['Pick-up', `${formatDate(start!)} at ${time}`],
+          ['Return', formatDate(end!)],
+          ['Duration', daysLabel(quote.days)],
+          ['Extra', quote.extras.length ? quote.extras.map((x) => x.extra.label).join(', ') : 'No'],
+          ['Deposit', formatPrice(quote.deposit)],
+          ...(comment.trim() ? ([['Requests', comment.trim()]] as [string, string][]) : []),
         ],
       });
       navigate(`/booking/success/?n=${request.number}`);
@@ -99,7 +99,7 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
       if (err instanceof SubmitError) {
         setStatus('error');
         setErrorText(err.message);
-        toast('Заявка не отправлена', 'error');
+        toast('Request not sent', 'error');
       } else {
         navigate('/booking/error/?type=rental');
       }
@@ -107,21 +107,21 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
   };
 
   return (
-    <form className="booking-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Бронирование автомобиля" data-testid="rental-form">
+    <form className="booking-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Car booking" data-testid="rental-form">
       <div className="booking-form__main">
         {!fixedCar ? (
-          <FormStep index={1} title="Автомобиль">
+          <FormStep index={1} title="Car">
             <SelectField
-              label="Модель"
+              label="Model"
               name="car"
-              placeholder="Выберите автомобиль"
+              placeholder="Choose a car"
               value={carSlug}
               error={show('car')}
               onChange={(e) => {
                 setCarSlug(e.target.value);
                 setTouched((t) => ({ ...t, car: true }));
               }}
-              options={cars.map((c) => ({ value: c.slug, label: `${carName(c)} — ${formatPrice(c.pricePerDay)} в сутки` }))}
+              options={cars.map((c) => ({ value: c.slug, label: `${carName(c)} — ${formatPrice(c.pricePerDay)} per day` }))}
             />
             {car ? (
               <div className="booking-car">
@@ -129,7 +129,7 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
                 <div>
                   <p className="h4">{carName(car)}</p>
                   <p className="caption">
-                    {car.powerHp} л.с., {seats(car.seats)}, залог {formatPrice(car.deposit)}, лимит {car.mileagePerDay} км/сутки
+                    {car.powerHp} hp, {seats(car.seats)}, deposit {formatPrice(car.deposit)}, limit {car.mileagePerDay} km/day
                   </p>
                 </div>
               </div>
@@ -137,23 +137,23 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
           </FormStep>
         ) : null}
 
-        <FormStep index={fixedCar ? 1 : 2} title="Даты и время" aside={start && end && quote ? daysLabel(quote.days) : null}>
+        <FormStep index={fixedCar ? 1 : 2} title="Dates and time" aside={start && end && quote ? daysLabel(quote.days) : null}>
           <div className={['dates', show('dates') ? 'has-error' : ''].join(' ')}>
             <div className="dates__summary" aria-live="polite">
               <div className={!start ? 'is-pending' : ''}>
-                <span className="caption">Получение</span>
-                <span>{start ? formatDate(start) : 'Выберите в календаре'}</span>
+                <span className="caption">Pick-up</span>
+                <span>{start ? formatDate(start) : 'Choose in the calendar'}</span>
               </div>
               <Icon name="arrow" />
               <div className={start && !end ? 'is-pending is-next' : !end ? 'is-pending' : ''}>
-                <span className="caption">Возврат</span>
-                <span>{end ? formatDate(end) : start ? 'Теперь выберите дату возврата' : '—'}</span>
+                <span className="caption">Return</span>
+                <span>{end ? formatDate(end) : start ? 'Now choose a return date' : '—'}</span>
               </div>
             </div>
             {mounted ? (
               <Calendar
                 mode="range"
-                label="Даты аренды"
+                label="Rental dates"
                 start={start}
                 end={end}
                 min={min}
@@ -176,7 +176,7 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
           </div>
           <div className={['time-slots', show('time') ? 'has-error' : ''].join(' ')}>
             <p className="field__label" id="pickup-time-label">
-              Время получения
+              Pick-up time
             </p>
             <div className="slots" role="radiogroup" aria-labelledby="pickup-time-label">
               {pickupTimes.map((t) => (
@@ -193,31 +193,31 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
           </div>
         </FormStep>
 
-        <FormStep index={fixedCar ? 2 : 3} title="Дополнительно">
+        <FormStep index={fixedCar ? 2 : 3} title="Extra">
           <div className="choices">
             {rentalExtras.map((x) => (
-              <Choice key={x.id} type="checkbox" name="extras" value={x.id} checked={extras.includes(x.id)} onChange={(on) => toggleExtra(x.id, on)} title={x.label} note={x.note} meta={`${formatPrice(x.price)}${x.per === 'day' ? ' / сутки' : ''}`} />
+              <Choice key={x.id} type="checkbox" name="extras" value={x.id} checked={extras.includes(x.id)} onChange={(on) => toggleExtra(x.id, on)} title={x.label} note={x.note} meta={`${formatPrice(x.price)}${x.per === 'day' ? ' / day' : ''}`} />
             ))}
           </div>
-          <TextArea label="Пожелания" name="comment" optional placeholder="Например, встреча в аэропорту или детское кресло" value={comment} onChange={(e) => setComment(e.target.value)} />
+          <TextArea label="Requests" name="comment" optional placeholder="For example, an airport pick-up or a child seat" value={comment} onChange={(e) => setComment(e.target.value)} />
         </FormStep>
 
-        <FormStep index={fixedCar ? 3 : 4} title="Контакты">
+        <FormStep index={fixedCar ? 3 : 4} title="Contacts">
           <ContactFields values={contact} errors={contactErrors} onChange={(k, v) => setContact((c) => ({ ...c, [k]: v }))} onBlur={(k) => setTouched((t) => ({ ...t, [k]: true }))} />
           <Consent checked={consent} onChange={setConsent} error={show('consent')} />
         </FormStep>
       </div>
 
-      <aside className="booking-form__summary" aria-label="Расчёт стоимости">
+      <aside className="booking-form__summary" aria-label="Price calculation">
         <div className="summary" data-testid="rental-summary">
-          <p className="summary__title">Расчёт стоимости</p>
+          <p className="summary__title">Price calculation</p>
           {car ? (
             <p className="summary__car">
               {carName(car)}
-              <span className="caption">{formatPrice(car.pricePerDay)} в сутки</span>
+              <span className="caption">{formatPrice(car.pricePerDay)} per day</span>
             </p>
           ) : (
-            <p className="summary__empty">Выберите автомобиль и даты — стоимость появится здесь.</p>
+            <p className="summary__empty">Choose a car and dates — the price will appear here.</p>
           )}
           {quote ? (
             <dl className="summary__lines">
@@ -241,26 +241,26 @@ export function RentalForm({ initialCar = '', fixedCar = false, initialStart = n
               ))}
               {quote.promoDiscount ? (
                 <div className="is-discount">
-                  <dt>Промокод {PROMO_CODE}</dt>
+                  <dt>Promo code {PROMO_CODE}</dt>
                   <dd>−{formatPrice(quote.promoDiscount)}</dd>
                 </div>
               ) : null}
               <div className="summary__total">
-                <dt>Итого</dt>
+                <dt>Total</dt>
                 <dd data-testid="rental-total">{formatPrice(quote.total)}</dd>
               </div>
               <div className="summary__deposit">
-                <dt>Залог, возвращается</dt>
+                <dt>Deposit, refundable</dt>
                 <dd>{formatPrice(quote.deposit)}</dd>
               </div>
             </dl>
           ) : car ? (
-            <p className="summary__empty">Выберите даты получения и возврата.</p>
+            <p className="summary__empty">Choose pick-up and return dates.</p>
           ) : null}
-          <TextField label="Промокод" name="promo" optional value={promo} onChange={(e) => setPromo(e.target.value)} hint={`Демо-код ${PROMO_CODE} даёт ещё 5%`} autoComplete="off" />
+          <TextField label="Promo code" name="promo" optional value={promo} onChange={(e) => setPromo(e.target.value)} hint={`Demo code ${PROMO_CODE} gives another 5%`} autoComplete="off" />
           {status === 'error' ? <ErrorBanner message={errorText} onRetry={() => form.current?.requestSubmit()} /> : null}
-          <SubmitButton sending={status === 'sending'} label="Отправить заявку" />
-          <DemoNote>Демонстрационное бронирование: заявка сохраняется только в вашем браузере, автомобиль не резервируется, оплата не списывается.</DemoNote>
+          <SubmitButton sending={status === 'sending'} label="Send request" />
+          <DemoNote>Demonstration booking: the request is stored only in your browser, no car is reserved and no payment is taken.</DemoNote>
         </div>
       </aside>
     </form>

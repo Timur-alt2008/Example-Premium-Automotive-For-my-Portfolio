@@ -25,9 +25,9 @@ export function Advantages() {
     <section className="section advantages" aria-labelledby="advantages-title">
       <div className="wrap advantages__grid">
         <div className="advantages__head">
-          <Split id="advantages-title" lines={['Почему машины', 'к нам возвращаются']} className="h2" />
+          <Split id="advantages-title" lines={['Why the cars', 'come back to us']} className="h2" />
           <p className="lead" data-reveal="up">
-            Семь правил, которые не меняются ни для арендного McLaren, ни для вашего семейного внедорожника.
+            Seven rules that never change — whether it is a rental McLaren or your family SUV.
           </p>
         </div>
         <ul className="advantages__list" ref={list}>

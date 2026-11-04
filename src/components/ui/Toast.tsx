@@ -41,7 +41,7 @@ function Toast({ item, onDone }: { item: ToastItem; onDone: () => void }) {
     <div className={`toast toast--${item.tone}`}>
       <Icon name={item.tone === 'error' ? 'alert' : item.tone === 'success' ? 'check' : 'info'} />
       <p>{item.text}</p>
-      <button type="button" className="toast__close" onClick={onDone} aria-label="Закрыть уведомление">
+      <button type="button" className="toast__close" onClick={onDone} aria-label="Close notification">
         <Icon name="close" />
       </button>
     </div>

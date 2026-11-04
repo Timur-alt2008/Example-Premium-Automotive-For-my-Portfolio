@@ -5,7 +5,7 @@ import { BeforeAfter } from '../detailing/BeforeAfter';
 import { Icon } from '../ui/Icon';
 import { Split } from '../ui/Split';
 
-export function BeforeAfterShowcase({ title = ['Разница видна', 'под светом'] }: { title?: string[] }) {
+export function BeforeAfterShowcase({ title = ['The difference shows', 'under the light'] }: { title?: string[] }) {
   const [index, setIndex] = useState(0);
   const item = beforeAfterCases[index];
   return (
@@ -14,9 +14,9 @@ export function BeforeAfterShowcase({ title = ['Разница видна', 'п�
         <div className="ba-showcase__head">
           <Split id="ba-title" lines={title} className="h2" />
           <p className="lead" data-reveal="up">
-            Проведите линией света по фото, чтобы сравнить состояние до и после работы.
+            Drag the line of light across the photo to compare the condition before and after.
           </p>
-          <div className="ba-showcase__tabs" role="tablist" aria-label="Примеры работ">
+          <div className="ba-showcase__tabs" role="tablist" aria-label="Examples of our work">
             {beforeAfterCases.map((c, i) => (
               <button key={c.title} type="button" role="tab" aria-selected={index === i} className={['ba-tab', index === i ? 'is-active' : ''].join(' ')} onClick={() => setIndex(i)}>
                 <span className="ba-tab__title">{c.title}</span>
@@ -25,7 +25,7 @@ export function BeforeAfterShowcase({ title = ['Разница видна', 'п�
             ))}
           </div>
           <Link to={`/detailing/${item.serviceSlug}/`} className="text-link">
-            Об услуге «{item.service}» <Icon name="arrow" />
+            About “{item.service}” <Icon name="arrow" />
           </Link>
         </div>
         <div className="ba-showcase__stage" role="tabpanel" aria-label={item.title}>

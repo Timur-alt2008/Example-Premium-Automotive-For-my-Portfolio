@@ -9,7 +9,7 @@ export function Socials({ className }: { className?: string }) {
     <ul className={['socials', className].filter(Boolean).join(' ')}>
       {company.socials.map((s) => (
         <li key={s.id}>
-          <button type="button" className="socials__btn" aria-label={`${s.label} Example (демо-профиль)`} onClick={() => toast(`${s.label}: демонстрационный профиль, страница в соцсети не создавалась.`)}>
+          <button type="button" className="socials__btn" aria-label={`${s.label} Example (demo profile)`} onClick={() => toast(`${s.label}: a demonstration profile, no social media page has been created.`)}>
             <Icon name={s.id as IconName} />
           </button>
         </li>

@@ -50,7 +50,7 @@ export function Photo({ k, ratio, sizes = '100vw', priority = false, alt, classN
           <span className="photo__mark" aria-hidden="true">
             E
           </span>
-          <span className="photo__note">Фото временно недоступно</span>
+          <span className="photo__note">Photo temporarily unavailable</span>
         </div>
       ) : (
         <img

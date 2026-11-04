@@ -9,45 +9,45 @@ import { Link } from '../router/router';
 
 const principles = [
   {
-    title: 'Сначала свет, потом работа',
-    text: 'Любая машина начинается с осмотра под тремя видами освещения и замера толщины лака. Мы показываем вам дефекты до того, как назовём цену — чтобы вы видели, за что платите.',
+    title: 'Light first, then the work',
+    text: 'Every car starts with an inspection under three kinds of light and a paint thickness reading. We show you the defects before we quote a price, so you can see exactly what you pay for.',
     photo: 'wheel-light' as const,
   },
   {
-    title: 'Один мастер — одна машина',
-    text: 'Автомобиль не переходит из рук в руки между сменами. Мастер, который принимал машину, отдаёт её вам и может рассказать о каждой панели.',
+    title: 'One specialist, one car',
+    text: 'The car is never passed between shifts. The specialist who checked it in hands it back to you and can tell you about every panel.',
     photo: 'det-wax-a' as const,
   },
   {
-    title: 'Арендный парк — по тем же правилам',
-    text: 'Машины коллекции обслуживают те же люди, что работают с автомобилями клиентов. Перед каждой выдачей — мойка, осмотр под светом и проверка салона.',
+    title: 'The rental fleet — by the same rules',
+    text: 'The collection is looked after by the same people who work on our clients’ cars. Before every handover: a wash, an inspection under the lights and an interior check.',
     photo: 'studio-b' as const,
   },
 ];
 
 const equipment = [
-  ['Свет', 'Линейные LED-панели 6500 K в каждом боксе, ручные фонари с CRI 95+ и лампа солнечного спектра'],
-  ['Полировка', 'Эксцентриковые машинки с ходом 15 и 21 мм, ротационные машинки для локальной коррекции'],
-  ['Контроль', 'Толщиномеры ЛКП для металла и алюминия, микроскоп для оценки царапин'],
-  ['Плёнка', 'Плоттер с базой лекал на 3 000+ моделей, отдельный бокс с контролем пыли'],
-  ['Керамика', 'Бокс с климат-контролем и ИК-лампами для полимеризации'],
-  ['Салон', 'Экстрактор, парогенератор, осушитель воздуха, озонатор'],
+  ['Light', 'Linear 6500 K LED panels in every bay, handheld CRI 95+ torches and a full-spectrum sun lamp'],
+  ['Polishing', 'Dual-action polishers with 15 and 21 mm throws, rotary polishers for spot correction'],
+  ['Inspection', 'Paint thickness gauges for steel and aluminium, a microscope for assessing scratches'],
+  ['Film', 'A plotter with templates for 3,000+ models and a separate dust-controlled bay'],
+  ['Ceramic', 'A climate-controlled bay with infrared curing lamps'],
+  ['Interior', 'Extractor, steam generator, dehumidifier, ozone generator'],
 ];
 
 export default function About() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'О студии' }]}
-        title={['Мастерская,', 'где светло']}
+        crumbs={[{ label: 'About' }]}
+        title={['A workshop', 'full of light']}
         photo="studio-a"
-        lead="Example вырос из простой идеи: автомобиль выглядит по-настоящему ухоженным, только если он выдерживает проверку любым светом. Всё остальное — следствие."
+        lead="Example grew out of a simple idea: a car only looks truly cared for if it passes inspection under any light. Everything else follows from that."
       />
 
       <section className="section principles" aria-labelledby="principles-title">
         <div className="wrap">
           <h2 className="visually-hidden" id="principles-title">
-            Принципы работы
+            How we work
           </h2>
           {principles.map((p, i) => (
             <article key={p.title} className={['principle', i % 2 ? 'principle--flip' : ''].join(' ')}>
@@ -67,7 +67,7 @@ export default function About() {
 
       <section className="section equipment" aria-labelledby="equipment-title">
         <div className="wrap equipment__grid">
-          <Split id="equipment-title" lines={['Оборудование', 'студии']} className="h2" />
+          <Split id="equipment-title" lines={['Studio', 'equipment']} className="h2" />
           <dl className="spec-sheet spec-sheet--wide">
             {equipment.map(([k, v]) => (
               <div key={k} data-reveal="up">
@@ -82,8 +82,8 @@ export default function About() {
       <section className="section team" aria-labelledby="team-title">
         <div className="wrap">
           <div className="section-head">
-            <Split id="team-title" lines={['Команда']} className="h2" />
-            <p className="caption">Имена и биографии сотрудников вымышлены, на фотографиях — работа в процессе.</p>
+            <Split id="team-title" lines={['Team']} className="h2" />
+            <p className="caption">Staff names and biographies are fictional; the photos show work in progress.</p>
           </div>
           <ul className="team__grid">
             {team.map((m, i) => (
@@ -93,7 +93,7 @@ export default function About() {
                   <h3 className="h4">{m.name}</h3>
                   <p className="member__role">{m.role}</p>
                   <p className="small muted">{m.focus}</p>
-                  <p className="caption">В Example с {m.since} года</p>
+                  <p className="caption">At Example since {m.since}</p>
                 </div>
               </li>
             ))}
@@ -104,9 +104,9 @@ export default function About() {
       <section className="section timeline" aria-labelledby="timeline-title">
         <div className="wrap timeline__grid">
           <div>
-            <Split id="timeline-title" lines={['Двенадцать лет', 'в пяти строках']} className="h2" />
+            <Split id="timeline-title" lines={['Twelve years', 'in five lines']} className="h2" />
             <Link to="/contacts/" className="text-link">
-              Приехать в студию <Icon name="arrow" />
+              Come to the studio <Icon name="arrow" />
             </Link>
           </div>
           <ol className="timeline__list">

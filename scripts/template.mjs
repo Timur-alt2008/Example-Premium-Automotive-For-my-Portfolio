@@ -9,7 +9,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').repl
 export function page({ path, meta, image, body, js, css, heroImage, preloads = [] }) {
   const url = SITE + path;
   return `<!doctype html>
-<html lang="ru">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -20,7 +20,7 @@ export function page({ path, meta, image, body, js, css, heroImage, preloads = [
 <meta name="theme-color" content="#030304">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Example">
-<meta property="og:locale" content="ru_RU">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="${esc(meta.title)}">
 <meta property="og:description" content="${esc(meta.description)}">
 <meta property="og:url" content="${url}">

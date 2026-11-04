@@ -1,6 +1,7 @@
 import { cars, carName, carBySlug } from '../data/cars';
 import { photoUrl, type PhotoKey } from '../data/media';
 import { services, serviceBySlug } from '../data/services';
+import { formatNumber } from '../lib/format';
 
 export type RouteName =
   | 'home'
@@ -61,39 +62,39 @@ const SUFFIX = 'Example';
 export function metaFor(match: Match): PageMeta {
   switch (match.name) {
     case 'home':
-      return { title: `${SUFFIX} — детейлинг-студия и аренда суперкаров`, description: 'Премиальный детейлинг: полировка, керамика, PPF и химчистка. Коллекция из 14 суперкаров и люксовых автомобилей для аренды с доставкой.', image: 'hero-silhouette' };
+      return { title: `${SUFFIX} — a detailing studio and supercar rental`, description: 'Premium detailing: polishing, ceramic coatings, PPF and interior cleaning. A collection of 14 supercars and luxury cars for rent with delivery.', image: 'hero-silhouette' };
     case 'detailing':
-      return { title: `Детейлинг: полировка, керамика, PPF — ${SUFFIX}`, description: 'Семнадцать услуг для кузова и салона, три пакета обслуживания и проверка каждой панели под тремя видами света.', image: 'det-polish' };
+      return { title: `Detailing: polishing, ceramic coatings, PPF — ${SUFFIX}`, description: 'Seventeen services for paintwork and interior, three care packages and every panel checked under three kinds of light.', image: 'det-polish' };
     case 'service': {
       const s = serviceBySlug(match.params.slug)!;
-      return { title: `${s.name} — детейлинг ${SUFFIX}`, description: `${s.summary} ${s.duration}, от ${s.priceFrom} €. ${s.result}`, image: s.photo };
+      return { title: `${s.name} — detailing ${SUFFIX}`, description: `${s.summary} ${s.duration}, from €${formatNumber(s.priceFrom)}. ${s.result}`, image: s.photo };
     }
     case 'catalog':
-      return { title: `Аренда суперкаров и люксовых автомобилей — ${SUFFIX}`, description: 'Lamborghini, Ferrari, McLaren, Porsche, Rolls-Royce, Bentley и другие. Фильтры по марке, мощности, цене и количеству мест.', image: 'mclaren-a' };
+      return { title: `Supercar and luxury car rental — ${SUFFIX}`, description: 'Lamborghini, Ferrari, McLaren, Porsche, Rolls-Royce, Bentley and more. Filter by brand, power, price and number of seats.', image: 'mclaren-a' };
     case 'car': {
       const c = carBySlug(match.params.slug)!;
-      return { title: `${carName(c)} ${c.year} в аренду — ${SUFFIX}`, description: `${c.tagline}. ${c.powerHp} л.с., 0–100 км/ч за ${String(c.accel).replace('.', ',')} с. От ${c.pricePerDay} € в сутки.`, image: c.photos[0] };
+      return { title: `${carName(c)} ${c.year} for rent — ${SUFFIX}`, description: `${c.tagline}. ${c.powerHp} hp, 0–100 km/h in ${c.accel.toFixed(1)} s. From €${formatNumber(c.pricePerDay)} per day.`, image: c.photos[0] };
     }
     case 'booking':
-      return { title: `Бронирование автомобиля и запись на детейлинг — ${SUFFIX}`, description: 'Выберите автомобиль и даты или услугу детейлинга — стоимость рассчитывается сразу.', image: 'tunnel' };
+      return { title: `Car rental and detailing appointments — ${SUFFIX}`, description: 'Choose a car and dates, or a detailing service — the price is calculated instantly.', image: 'tunnel' };
     case 'success':
-      return { title: `Заявка отправлена — ${SUFFIX}`, description: 'Ваша заявка принята.', image: 'tunnel', noindex: true };
+      return { title: `Request sent — ${SUFFIX}`, description: 'Your request has been received.', image: 'tunnel', noindex: true };
     case 'error':
-      return { title: `Заявка не отправлена — ${SUFFIX}`, description: 'Не удалось отправить заявку.', image: 'tunnel', noindex: true };
+      return { title: `Request not sent — ${SUFFIX}`, description: 'The request could not be sent.', image: 'tunnel', noindex: true };
     case 'gallery':
-      return { title: `Галерея работ — ${SUFFIX}`, description: 'Суперкары коллекции, детейлинг, салоны и примеры до и после.', image: 'aventador-smoke' };
+      return { title: `Gallery of work — ${SUFFIX}`, description: 'The collection’s supercars, detailing, interiors and before-and-after examples.', image: 'aventador-smoke' };
     case 'about':
-      return { title: `О студии — ${SUFFIX}`, description: 'Как мы работаем с автомобилями: один мастер на машину, свет 6500 K и контроль под тремя видами освещения.', image: 'studio-a' };
+      return { title: `About the studio — ${SUFFIX}`, description: 'How we work with cars: one specialist per car, 6500 K light and inspection under three kinds of light.', image: 'studio-a' };
     case 'contacts':
-      return { title: `Контакты — ${SUFFIX}`, description: 'Адрес студии, телефоны, часы работы и форма обратной связи.', image: 'studio-b' };
+      return { title: `Contacts — ${SUFFIX}`, description: 'Studio address, phone numbers, opening hours and a contact form.', image: 'studio-b' };
     case 'faq':
-      return { title: `Вопросы и ответы — ${SUFFIX}`, description: 'Документы для аренды, залог, сроки полировки, керамика, PPF и изменение заявки.', image: 'det-beading' };
+      return { title: `Questions and answers — ${SUFFIX}`, description: 'Rental documents, deposit, polishing times, ceramic coatings, PPF and changing a request.', image: 'det-beading' };
     case 'privacy':
-      return { title: `Политика конфиденциальности — ${SUFFIX}`, description: 'Какие данные собирает сайт и где они хранятся.', image: 'studio-b' };
+      return { title: `Privacy policy — ${SUFFIX}`, description: 'What data the site collects and where it is stored.', image: 'studio-b' };
     case 'terms':
-      return { title: `Условия аренды — ${SUFFIX}`, description: 'Требования к водителю, залог, лимиты пробега и правила использования автомобилей.', image: 'tunnel' };
+      return { title: `Rental terms — ${SUFFIX}`, description: 'Driver requirements, deposit, mileage limits and rules for using the cars.', image: 'tunnel' };
     default:
-      return { title: `Страница не найдена — ${SUFFIX}`, description: 'Такой страницы нет.', image: 'corridor', noindex: true };
+      return { title: `Page not found — ${SUFFIX}`, description: 'This page does not exist.', image: 'corridor', noindex: true };
   }
 }
 

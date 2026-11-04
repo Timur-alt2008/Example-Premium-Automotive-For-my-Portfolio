@@ -16,22 +16,22 @@ export function Footer() {
       <div className="wrap">
         <div className="footer__top">
           <div className="footer__intro">
-            <p className="footer__lede">Детейлинг-студия и коллекция автомобилей под одной крышей. Готовим каждую машину так, будто её проверят под студийным светом.</p>
+            <p className="footer__lede">A detailing studio and a car collection under one roof. We prepare every car as if it is about to be inspected under studio lights.</p>
             <div className="footer__cta">
               <Link to="/booking/" className="btn btn--primary">
-                Забронировать автомобиль
+                Book a car
               </Link>
               <Link to="/booking/?type=detailing" className="btn btn--ghost">
-                Записаться в студию
+                Book at the studio
               </Link>
             </div>
           </div>
           <div className="footer__cols">
             <div className="footer__col">
-              <p className="footer__title">Студия</p>
+              <p className="footer__title">Studio</p>
               <ul>
                 <li>
-                  <Link to="/detailing/">Все услуги и пакеты</Link>
+                  <Link to="/detailing/">All services and packages</Link>
                 </li>
                 {popular.map((s) => (
                   <li key={s.slug}>
@@ -41,10 +41,10 @@ export function Footer() {
               </ul>
             </div>
             <div className="footer__col">
-              <p className="footer__title">Коллекция</p>
+              <p className="footer__title">Collection</p>
               <ul>
                 <li>
-                  <Link to="/cars/">Весь автопарк</Link>
+                  <Link to="/cars/">The whole fleet</Link>
                 </li>
                 {(Object.keys(categoryLabels) as CarCategory[]).map((c) => (
                   <li key={c}>
@@ -57,21 +57,21 @@ export function Footer() {
               <p className="footer__title">Example</p>
               <ul>
                 <li>
-                  <Link to="/about/">О студии</Link>
+                  <Link to="/about/">About</Link>
                 </li>
                 <li>
-                  <Link to="/gallery/">Галерея работ</Link>
+                  <Link to="/gallery/">Gallery of work</Link>
                 </li>
                 <li>
-                  <Link to="/faq/">Вопросы и ответы</Link>
+                  <Link to="/faq/">Questions and answers</Link>
                 </li>
                 <li>
-                  <Link to="/contacts/">Контакты</Link>
+                  <Link to="/contacts/">Contacts</Link>
                 </li>
               </ul>
             </div>
             <div className="footer__col footer__col--contacts">
-              <p className="footer__title">Контакты</p>
+              <p className="footer__title">Contacts</p>
               <address>
                 {company.address.street}
                 <br />
@@ -81,9 +81,9 @@ export function Footer() {
               <a href={company.phones.studio.href}>{company.phones.studio.display}</a>
               <a href={`mailto:${company.emails.general}`}>{company.emails.general}</a>
               <p className="footer__hours">
-                Пн–Пт {weekday.open}–{weekday.close}
+                Mon–Fri {weekday.open}–{weekday.close}
                 <br />
-                Сб {saturday.open}–{saturday.close}, Вс {sunday.open}–{sunday.close}
+                Sat {saturday.open}–{saturday.close}, Sun {sunday.open}–{sunday.close}
               </p>
             </div>
           </div>
@@ -93,11 +93,11 @@ export function Footer() {
         </p>
         <div className="footer__bottom">
           <p className="caption">
-            © {company.founded}–{year} Example. Вымышленный бренд: контакты, цены и заявки на сайте демонстрационные.
+            © {company.founded}–{year} Example. A fictional brand: contacts, prices and requests on this site are for demonstration only.
           </p>
-          <nav className="footer__legal" aria-label="Юридическая информация">
-            <Link to="/privacy/">Политика конфиденциальности</Link>
-            <Link to="/terms/">Условия аренды</Link>
+          <nav className="footer__legal" aria-label="Legal information">
+            <Link to="/privacy/">Privacy policy</Link>
+            <Link to="/terms/">Rental terms</Link>
           </nav>
           <Socials />
         </div>

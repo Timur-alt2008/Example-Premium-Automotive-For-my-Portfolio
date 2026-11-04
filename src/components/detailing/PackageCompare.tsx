@@ -7,8 +7,8 @@ import { Icon } from '../ui/Icon';
 import { Split } from '../ui/Split';
 
 function Value({ v }: { v: boolean | string }) {
-  if (v === true) return <Icon name="check" title="Входит" className="pkg-yes" />;
-  if (v === false) return <span className="pkg-no" aria-label="Не входит">—</span>;
+  if (v === true) return <Icon name="check" title="Included" className="pkg-yes" />;
+  if (v === false) return <span className="pkg-no" aria-label="Not included">—</span>;
   return <span>{v}</span>;
 }
 
@@ -21,23 +21,23 @@ export function PackageCompare() {
     <section className="section packages" id="packages" aria-labelledby="packages-title">
       <div className="wrap">
         <div className="section-head">
-          <Split id="packages-title" lines={['Три пакета', 'обслуживания']} className="h2" />
+          <Split id="packages-title" lines={['Three', 'care packages']} className="h2" />
           <div data-reveal="up">
-            <p className="lead">Пакет дешевле, чем те же услуги по отдельности, и проходит за один визит.</p>
-            <Segmented label="Тип автомобиля" value={size} onChange={setSize} options={(Object.keys(vehicleSizeLabels) as VehicleSize[]).map((v) => ({ value: v, label: vehicleSizeLabels[v] }))} className="packages__size" />
+            <p className="lead">A package costs less than the same services booked separately and is done in one visit.</p>
+            <Segmented label="Car type" value={size} onChange={setSize} options={(Object.keys(vehicleSizeLabels) as VehicleSize[]).map((v) => ({ value: v, label: vehicleSizeLabels[v] }))} className="packages__size" />
           </div>
         </div>
 
-        <Segmented label="Пакет для сравнения" value={mobilePkg} onChange={setMobilePkg} options={packages.map((p) => ({ value: p.id, label: p.name.split(' ')[0] }))} className="packages__mobile-switch" />
+        <Segmented label="Package to compare" value={mobilePkg} onChange={setMobilePkg} options={packages.map((p) => ({ value: p.id, label: p.name.split(' ')[0] }))} className="packages__mobile-switch" />
 
-        <div className="pkg-table" role="table" aria-label="Сравнение пакетов обслуживания" data-active={mobilePkg}>
+        <div className="pkg-table" role="table" aria-label="Care package comparison" data-active={mobilePkg}>
           <div className="pkg-row pkg-row--head" role="row">
             <div className="pkg-cell pkg-cell--label" role="columnheader">
-              <span className="visually-hidden">Что входит</span>
+              <span className="visually-hidden">What’s included</span>
             </div>
             {packages.map((p) => (
               <div key={p.id} className={['pkg-cell', `pkg-col--${p.id}`, p.id === 'premium' ? 'is-featured' : ''].join(' ')} role="columnheader">
-                {p.id === 'premium' ? <span className="pkg-badge">Выбирают чаще всего</span> : null}
+                {p.id === 'premium' ? <span className="pkg-badge">Most popular</span> : null}
                 <p className="pkg-name">{p.name}</p>
                 <p className="pkg-pitch">{p.pitch}</p>
                 <p className="pkg-price numeral" data-testid={`price-${p.id}`}>
@@ -47,7 +47,7 @@ export function PackageCompare() {
                   {p.duration}, {p.protection.toLowerCase()}
                 </p>
                 <Link to={`/booking/?type=detailing&package=${p.id}`} className={['btn btn--small btn--block', p.id === 'premium' ? 'btn--primary' : 'btn--ghost'].join(' ')}>
-                  Выбрать {p.name.split(' ')[0]}
+                  Choose {p.name.split(' ')[0]}
                 </Link>
               </div>
             ))}
@@ -66,7 +66,7 @@ export function PackageCompare() {
           ))}
           <div className="pkg-row" role="row">
             <div className="pkg-cell pkg-cell--label" role="rowheader">
-              Бонусы пакета
+              Package bonuses
             </div>
             {packages.map((p) => (
               <div key={p.id} className={['pkg-cell pkg-cell--extras', `pkg-col--${p.id}`, p.id === 'premium' ? 'is-featured' : ''].join(' ')} role="cell">

@@ -1,18 +1,18 @@
 import { expect, isMobile, open, test } from './fixtures';
 
 const pages = [
-  ['/', 'Безупречно'],
-  ['/detailing/', 'Детейлинг'],
-  ['/detailing/ceramic-coating/', 'Керамическое покрытие'],
-  ['/cars/', 'Автопарк'],
+  ['/', 'Flawless'],
+  ['/detailing/', 'Detailing'],
+  ['/detailing/ceramic-coating/', 'Ceramic coating'],
+  ['/cars/', 'Fleet'],
   ['/cars/porsche-911-gt3/', '911 GT3'],
-  ['/booking/', 'Бронирование'],
-  ['/gallery/', 'Галерея'],
-  ['/about/', 'Мастерская'],
-  ['/contacts/', 'Контакты'],
-  ['/faq/', 'Вопросы'],
-  ['/privacy/', 'Политика'],
-  ['/terms/', 'Условия'],
+  ['/booking/', 'a car'],
+  ['/gallery/', 'Gallery'],
+  ['/about/', 'workshop'],
+  ['/contacts/', 'Contacts'],
+  ['/faq/', 'Questions'],
+  ['/privacy/', 'Privacy'],
+  ['/terms/', 'Rental'],
 ] as const;
 
 for (const [path, heading] of pages) {
@@ -30,9 +30,9 @@ test('unknown url shows the 404 page', async ({ page, errors }) => {
   void errors;
   const res = await page.goto('does-not-exist/');
   expect(res?.status()).toBe(404);
-  await expect(page.locator('h1')).toContainText('Здесь пусто');
-  await page.getByRole('link', { name: 'На главную', exact: true }).click();
-  await expect(page.locator('h1')).toContainText('Безупречно');
+  await expect(page.locator('h1')).toContainText('Empty, like a bay');
+  await page.getByRole('link', { name: 'Home', exact: true }).click();
+  await expect(page.locator('h1')).toContainText('Flawless');
 });
 
 test('main navigation moves between sections without reloading', async ({ page, errors }) => {
@@ -40,25 +40,25 @@ test('main navigation moves between sections without reloading', async ({ page, 
   await open(page, '/');
   await page.evaluate(() => ((window as unknown as { marker: number }).marker = 42));
   if (isMobile(page)) {
-    await page.getByRole('button', { name: 'Открыть меню' }).click();
-    await page.locator('#mobile-menu').getByRole('link', { name: 'Автопарк' }).click();
+    await page.getByRole('button', { name: 'Open menu' }).click();
+    await page.locator('#mobile-menu').getByRole('link', { name: 'Fleet' }).click();
   } else {
-    await page.getByRole('navigation', { name: 'Основная навигация' }).getByRole('link', { name: 'Автопарк' }).click();
+    await page.getByRole('navigation', { name: 'Main navigation' }).getByRole('link', { name: 'Fleet' }).click();
   }
   await expect(page).toHaveURL(/\/cars\/$/);
-  await expect(page.locator('h1')).toContainText('Автопарк');
+  await expect(page.locator('h1')).toContainText('Fleet');
   expect(await page.evaluate(() => (window as unknown as { marker?: number }).marker)).toBe(42);
   await page.goBack();
-  await expect(page.locator('h1')).toContainText('Безупречно');
+  await expect(page.locator('h1')).toContainText('Flawless');
 });
 
 test('hero buttons lead to services and to the fleet', async ({ page, errors }) => {
   void errors;
   await open(page, '/');
-  await page.locator('.hero').getByRole('link', { name: 'Услуги студии' }).click();
+  await page.locator('.hero').getByRole('link', { name: 'Studio services' }).click();
   await expect(page).toHaveURL(/\/detailing\/$/);
   await page.goBack();
-  await page.locator('.hero').getByRole('link', { name: 'Выбрать автомобиль' }).click();
+  await page.locator('.hero').getByRole('link', { name: 'Choose a car' }).click();
   await expect(page).toHaveURL(/\/cars\/$/);
 });
 
@@ -67,9 +67,9 @@ test('mobile menu opens, closes with Escape and lists all sections', async ({ pa
   test.skip(!isMobile(page), 'mobile only');
   await open(page, '/');
   const menu = page.locator('#mobile-menu');
-  await page.getByRole('button', { name: 'Открыть меню' }).click();
+  await page.getByRole('button', { name: 'Open menu' }).click();
   await expect(menu).toHaveClass(/is-open/);
-  for (const label of ['Детейлинг', 'Автопарк', 'Галерея', 'О студии', 'Вопросы', 'Контакты']) {
+  for (const label of ['Detailing', 'Fleet', 'Gallery', 'About', 'Questions', 'Contacts']) {
     await expect(menu.getByRole('link', { name: label, exact: true })).toBeVisible();
   }
   await page.keyboard.press('Escape');

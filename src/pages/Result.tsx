@@ -18,41 +18,41 @@ export function Success() {
     <section className="result section" aria-labelledby="result-title">
       <div className="wrap result__grid">
         <div>
-          <Breadcrumbs items={[{ to: '/booking/', label: 'Бронирование' }, { label: 'Заявка отправлена' }]} />
+          <Breadcrumbs items={[{ to: '/booking/', label: 'Booking' }, { label: 'Request sent' }]} />
           <span className="result__icon result__icon--ok" aria-hidden="true">
             <Icon name="check" />
           </span>
           <h1 className="h2" id="result-title">
-            {request ? 'Заявка принята' : 'Заявка отправлена'}
+            {request ? 'Request received' : 'Request sent'}
           </h1>
           {request ? (
             <>
               <p className="result__number" data-testid="request-number">
-                <span className="caption">Номер заявки</span>
+                <span className="caption">Request number</span>
                 <span className="numeral">{request.number}</span>
               </p>
               <p className="lead">
-                {request.contact.name}, спасибо. Менеджер {isRental ? 'аренды' : 'студии'} подтвердит детали по телефону {request.contact.phone}. Назовите номер заявки, если захотите изменить дату.
+                {request.contact.name}, thank you. A manager {isRental ? 'rental' : 'studio'} will confirm the details by phone {request.contact.phone}. Quote the request number if you want to change the date.
               </p>
             </>
           ) : request === null ? (
-            <p className="lead">Мы не нашли данные заявки в этом браузере. Если вы отправили её с другого устройства, номер есть в письме-подтверждении.</p>
+            <p className="lead">We could not find this request in this browser. If you sent it from another device, the number is in your confirmation e-mail.</p>
           ) : null}
           <p className="demo-note">
             <Icon name="info" />
-            <span>Это демонстрационная заявка: она сохранена только в вашем браузере. Автомобиль не зарезервирован, оплата не списана, письмо не отправлялось.</span>
+            <span>This is a demonstration request: it is stored only in your browser. No car has been reserved, no payment taken and no e-mail sent.</span>
           </p>
           <div className="result__actions">
             <Link to="/" className="btn btn--primary">
-              На главную
+              Home
             </Link>
             <Link to={isRental ? '/cars/' : '/detailing/'} className="btn btn--ghost">
-              {isRental ? 'Смотреть автопарк' : 'Услуги студии'}
+              {isRental ? 'View the fleet' : 'Studio services'}
             </Link>
           </div>
         </div>
         {request ? (
-          <aside className="summary result__summary" aria-label="Детали заявки">
+          <aside className="summary result__summary" aria-label="Request details">
             <p className="summary__title">{request.title}</p>
             <dl className="summary__lines">
               {request.lines.map(([k, v]) => (
@@ -63,7 +63,7 @@ export function Success() {
               ))}
               {typeof request.total === 'number' ? (
                 <div className="summary__total">
-                  <dt>{isRental ? 'Итого' : 'Ориентировочно'}</dt>
+                  <dt>{isRental ? 'Total' : 'Approximately'}</dt>
                   <dd>{formatPrice(request.total)}</dd>
                 </div>
               ) : null}
@@ -82,17 +82,17 @@ export function ErrorPage() {
     <section className="result section" aria-labelledby="error-title">
       <div className="wrap result__grid">
         <div>
-          <Breadcrumbs items={[{ to: '/booking/', label: 'Бронирование' }, { label: 'Ошибка отправки' }]} />
+          <Breadcrumbs items={[{ to: '/booking/', label: 'Booking' }, { label: 'Sending error' }]} />
           <span className="result__icon result__icon--error" aria-hidden="true">
             <Icon name="alert" />
           </span>
           <h1 className="h2" id="error-title">
-            Заявка не отправлена
+            Request not sent
           </h1>
-          <p className="lead">Во время отправки произошла ошибка. Данные формы не сохранились — заполните её ещё раз или позвоните нам, и менеджер оформит заявку по телефону.</p>
+          <p className="lead">Something went wrong while sending. The form data was not saved — fill it in again or call us, and a manager will take the request by phone.</p>
           <div className="result__actions">
             <Link to={detailing ? '/booking/?type=detailing' : '/booking/'} className="btn btn--primary">
-              Заполнить заново
+              Start again
             </Link>
             <a href={detailing ? company.phones.studio.href : company.phones.rental.href} className="btn btn--ghost">
               <Icon name="phone" /> {detailing ? company.phones.studio.display : company.phones.rental.display}

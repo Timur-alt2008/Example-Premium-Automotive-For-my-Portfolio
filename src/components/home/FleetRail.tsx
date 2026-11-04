@@ -61,21 +61,21 @@ export function FleetRail() {
     <section className="section fleet" aria-labelledby="fleet-title">
       <div className="wrap">
         <div className="section-head">
-          <Split id="fleet-title" lines={['Коллекция', 'на сегодня']} className="h2" />
+          <Split id="fleet-title" lines={['The collection', 'today']} className="h2" />
           <div className="fleet__head-side" data-reveal="up">
-            <p className="lead">Каждый автомобиль проходит детейлинг перед каждой выдачей. Пробег и состояние фиксируем на фото вместе с вами.</p>
+            <p className="lead">Every car is detailed before every handover. Mileage and condition are recorded on photos together with you.</p>
             <div className="fleet__arrows">
-              <button type="button" className="icon-btn" onClick={() => step(-1)} disabled={edges.start} aria-label="Предыдущие автомобили">
+              <button type="button" className="icon-btn" onClick={() => step(-1)} disabled={edges.start} aria-label="Previous cars">
                 <Icon name="arrowLeft" />
               </button>
-              <button type="button" className="icon-btn" onClick={() => step(1)} disabled={edges.end} aria-label="Следующие автомобили">
+              <button type="button" className="icon-btn" onClick={() => step(1)} disabled={edges.end} aria-label="Next cars">
                 <Icon name="arrow" />
               </button>
             </div>
           </div>
         </div>
       </div>
-      <div className="rail" ref={rail} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onClickCapture={onClickCapture} tabIndex={0} aria-label="Избранные автомобили, прокручиваются горизонтально">
+      <div className="rail" ref={rail} onPointerDown={onDown} onPointerMove={onMove} onPointerUp={onUp} onPointerLeave={onUp} onClickCapture={onClickCapture} tabIndex={0} aria-label="Featured cars, scrolls horizontally">
         {featured.map((car) => (
           <div className="rail__item" key={car.slug}>
             <CarCard car={car} sizes="(min-width: 1100px) 36vw, (min-width: 700px) 60vw, 86vw" />
@@ -83,15 +83,15 @@ export function FleetRail() {
         ))}
         <div className="rail__item rail__item--end">
           <Link to="/cars/" className="rail__all">
-            <span className="h3">Ещё {cars.length - featured.length} автомобилей</span>
+            <span className="h3">More {cars.length - featured.length} cars</span>
             <span className="text-link">
-              Весь автопарк <Icon name="arrow" />
+              The whole fleet <Icon name="arrow" />
             </span>
           </Link>
         </div>
       </div>
       <div className="wrap">
-        <ul className="fleet__categories" aria-label="Категории автопарка">
+        <ul className="fleet__categories" aria-label="Fleet categories">
           {(Object.keys(categoryLabels) as CarCategory[]).map((c) => (
             <li key={c}>
               <Link to={`/cars/?category=${c}`} className="chip">

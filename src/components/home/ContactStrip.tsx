@@ -12,7 +12,7 @@ export function HoursList() {
       {studioHours.map((h) => (
         <li key={h.day} className={h.day === today ? 'is-today' : ''}>
           <span>{h.label}</span>
-          <span>{h.open && h.close ? `${h.open}–${h.close}` : 'Выходной'}</span>
+          <span>{h.open && h.close ? `${h.open}–${h.close}` : 'Closed'}</span>
         </li>
       ))}
     </ul>
@@ -25,7 +25,7 @@ export function ContactStrip() {
       <div className="wrap contact-strip__grid">
         <div className="contact-strip__info">
           <h2 className="h2" id="contact-strip-title" data-reveal="up">
-            Приезжайте в студию
+            Visit the studio
           </h2>
           <address className="contact-strip__address" data-reveal="up">
             <Icon name="pin" />
@@ -43,7 +43,7 @@ export function ContactStrip() {
             ))}
           </div>
           <Link to="/contacts/" className="text-link">
-            Все контакты и форма обратной связи <Icon name="arrow" />
+            All contacts and a contact form <Icon name="arrow" />
           </Link>
         </div>
         <div className="contact-strip__map" data-reveal="up">

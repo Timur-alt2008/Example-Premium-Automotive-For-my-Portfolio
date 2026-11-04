@@ -7,24 +7,24 @@ const directions: { to: string; photo: PhotoKey; title: string; text: string; po
   {
     to: '/detailing/',
     photo: 'studio-a',
-    title: 'Студия детейлинга',
-    text: 'Полировка, керамика, PPF и уход за салоном для автомобилей, которые хочется сохранить такими, какими они были в день покупки.',
-    points: ['17 услуг для кузова и салона', 'Три пакета обслуживания', 'Отдельный бокс под каждый этап'],
-    action: 'Услуги и цены',
+    title: 'Detailing studio',
+    text: 'Polishing, ceramic coatings, PPF and interior care for cars you want to keep exactly as they were on the day you bought them.',
+    points: ['17 services for body and interior', 'Three care packages', 'A separate bay for each stage'],
+    action: 'Services and prices',
   },
   {
     to: '/cars/',
     photo: 'mclaren-a',
-    title: 'Коллекция автомобилей',
-    text: 'Суперкары, гран-туреры и внедорожники на день, выходные или длинный маршрут. Каждая машина проходит тот же контроль, что и автомобили клиентов.',
-    points: ['14 автомобилей от 450 до 830 л.с.', 'Доставка по адресу', 'Водитель Example по запросу'],
-    action: 'Смотреть автопарк',
+    title: 'Car collection',
+    text: 'Supercars, grand tourers and SUVs for a day, a weekend or a long route. Every car goes through the same checks as our clients’ cars.',
+    points: ['14 cars from 450 to 830 hp', 'Delivery to your address', 'An Example driver on request'],
+    action: 'View the fleet',
   },
 ];
 
 export function Directions() {
   return (
-    <section className="directions" aria-label="Направления Example">
+    <section className="directions" aria-label="What Example does">
       {directions.map((d, i) => (
         <Link key={d.to} to={d.to} className="direction" data-reveal="clip" style={{ '--d': i * 160 } as React.CSSProperties}>
           <Photo k={d.photo} className="direction__photo" sizes="(min-width: 900px) 60vw, 100vw" />

@@ -12,9 +12,9 @@ export function LayerAnatomy() {
     <section className="section anatomy" aria-labelledby="anatomy-title">
       <div className="wrap anatomy__grid">
         <div className="anatomy__text">
-          <Split id="anatomy-title" lines={['Что мы защищаем,', 'в микронах']} className="h2" />
+          <Split id="anatomy-title" lines={['What we protect,', 'in microns']} className="h2" />
           <p className="lead" data-reveal="up">
-            Заводское покрытие тоньше листа бумаги. Выберите слой, чтобы узнать, какая работа с ним связана.
+            The factory paint is thinner than a sheet of paper. Choose a layer to see which work it relates to.
           </p>
           <div className="anatomy__detail" aria-live="polite">
             <p className="anatomy__thickness numeral">{layer.thickness}</p>
@@ -22,12 +22,12 @@ export function LayerAnatomy() {
             <p>{layer.note}</p>
             {layer.service ? (
               <Link to={`/detailing/${layer.service}/`} className="text-link">
-                Подробнее об услуге <Icon name="arrow" />
+                More about the service <Icon name="arrow" />
               </Link>
             ) : null}
           </div>
         </div>
-        <div className="anatomy__stack" role="listbox" aria-label="Слои лакокрасочного покрытия" data-reveal="up">
+        <div className="anatomy__stack" role="listbox" aria-label="Layers of the paint system" data-reveal="up">
           {paintLayers.map((l) => (
             <button
               key={l.id}

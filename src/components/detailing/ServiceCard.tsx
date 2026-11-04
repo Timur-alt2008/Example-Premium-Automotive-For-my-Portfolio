@@ -25,27 +25,27 @@ export function ServiceCard({ service }: { service: Service }) {
               <Icon name="check" /> {item}
             </li>
           ))}
-          {more > 0 ? <li className="service-card__more">и ещё {more}</li> : null}
+          {more > 0 ? <li className="service-card__more">and {more}</li> : null}
         </ul>
         <dl className="service-card__meta">
           <div>
-            <dt>Время</dt>
+            <dt>Time</dt>
             <dd>{service.duration}</dd>
           </div>
           <div>
-            <dt>Стоимость</dt>
+            <dt>Price</dt>
             <dd>
-              {service.variablePrice ? 'от ' : ''}
+              {service.variablePrice ? 'from ' : ''}
               {formatPrice(service.priceFrom)}
             </dd>
           </div>
         </dl>
         <div className="service-card__actions">
-          <Link to={url} className="btn btn--ghost btn--small" aria-label={`Подробнее об услуге «${service.name}»`}>
-            Подробнее
+          <Link to={url} className="btn btn--ghost btn--small" aria-label={`More about “${service.name}”`}>
+            More
           </Link>
-          <Link to={`/booking/?type=detailing&service=${service.slug}`} className="btn btn--primary btn--small" aria-label={`Записаться: ${service.name}`}>
-            Записаться
+          <Link to={`/booking/?type=detailing&service=${service.slug}`} className="btn btn--primary btn--small" aria-label={`Book: ${service.name}`}>
+            Book
           </Link>
         </div>
       </div>

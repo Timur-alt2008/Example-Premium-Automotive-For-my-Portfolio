@@ -53,7 +53,7 @@ export class SubmitError extends Error {}
 export async function submitRequest(data: Omit<StoredRequest, 'number' | 'createdAt'>, delay = 1100): Promise<StoredRequest> {
   await new Promise((resolve) => setTimeout(resolve, delay));
   if (typeof navigator !== 'undefined' && navigator.onLine === false) {
-    throw new SubmitError('Нет подключения к интернету. Проверьте соединение и отправьте заявку ещё раз — введённые данные сохранились.');
+    throw new SubmitError('No internet connection. Check your connection and send the request again — everything you entered has been kept.');
   }
   const request: StoredRequest = { ...data, number: makeRequestNumber(data.kind), createdAt: new Date().toISOString() };
   write([request, ...read()]);

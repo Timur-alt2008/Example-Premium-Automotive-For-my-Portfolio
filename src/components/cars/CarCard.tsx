@@ -31,24 +31,24 @@ export function CarCard({ car, sizes = '(min-width: 1200px) 33vw, (min-width: 72
         </div>
         <dl className="car-card__stats">
           <div>
-            <dt>Мощность</dt>
+            <dt>Power</dt>
             <dd>
               {car.powerHp}
-              <small>л.с.</small>
+              <small>hp</small>
             </dd>
           </div>
           <div>
-            <dt>0–100 км/ч</dt>
+            <dt>0–100 km/h</dt>
             <dd>
               {formatDecimal(car.accel)}
-              <small>с</small>
+              <small>s</small>
             </dd>
           </div>
           <div>
-            <dt>Макс. скорость</dt>
+            <dt>Top speed</dt>
             <dd>
               {car.topSpeed}
-              <small>км/ч</small>
+              <small>km/h</small>
             </dd>
           </div>
         </dl>
@@ -60,20 +60,20 @@ export function CarCard({ car, sizes = '(min-width: 1200px) 33vw, (min-width: 72
             <Icon name="seat" /> {seats(car.seats)}
           </li>
           <li>
-            <Icon name="drive" /> {driveLabels[car.drive]} привод
+            <Icon name="drive" /> {driveLabels[car.drive]} drive
           </li>
         </ul>
         <div className="car-card__footer">
           <p className="car-card__price">
             <span className="numeral">{formatPrice(car.pricePerDay)}</span>
-            <span className="caption">в сутки</span>
+            <span className="caption">per day</span>
           </p>
           <div className="car-card__actions">
-            <Link to={url} className="btn btn--ghost btn--small" aria-label={`Подробнее: ${carName(car)}`}>
-              Подробнее
+            <Link to={url} className="btn btn--ghost btn--small" aria-label={`More: ${carName(car)}`}>
+              More
             </Link>
-            <Link to={`/booking/?car=${car.slug}`} className="btn btn--primary btn--small" aria-label={`Забронировать ${carName(car)}`}>
-              Забронировать
+            <Link to={`/booking/?car=${car.slug}`} className="btn btn--primary btn--small" aria-label={`Book ${carName(car)}`}>
+              Book
             </Link>
           </div>
         </div>

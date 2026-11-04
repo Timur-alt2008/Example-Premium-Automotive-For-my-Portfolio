@@ -16,7 +16,7 @@ function FieldShell({ id, label, hint, error, optional, children, className }: F
     <div className={['field', error ? 'has-error' : '', className].filter(Boolean).join(' ')}>
       <label className="field__label" htmlFor={id}>
         {label}
-        {optional ? <span className="field__optional">необязательно</span> : null}
+        {optional ? <span className="field__optional">optional</span> : null}
       </label>
       {children}
       {error ? (

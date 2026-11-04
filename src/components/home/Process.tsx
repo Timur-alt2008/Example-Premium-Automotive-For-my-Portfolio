@@ -28,9 +28,9 @@ export function Process() {
     <section className="section process" ref={root} aria-labelledby="process-title">
       <div className="wrap">
         <div className="section-head">
-          <Split id="process-title" lines={['Как проходит', 'работа в студии']} className="h2" />
+          <Split id="process-title" lines={['How a job runs', 'in the studio']} className="h2" />
           <p className="lead" data-reveal="up">
-            От заявки до выдачи — пять шагов. На каждом вы получаете фотографии и знаете, что происходит с автомобилем.
+            From request to handover in five steps. At each one you get photos and know exactly what is happening with your car.
           </p>
         </div>
         <div className="process__track">

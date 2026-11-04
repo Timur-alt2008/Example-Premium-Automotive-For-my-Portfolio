@@ -23,9 +23,9 @@ export function ServiceIndex() {
     <section className="section service-index" aria-labelledby="services-title">
       <div className="wrap">
         <div className="section-head">
-          <Split id="services-title" lines={['Чаще всего', 'к нам приезжают за этим']} className="h2" />
+          <Split id="services-title" lines={['What people', 'come to us for']} className="h2" />
           <p className="lead" data-reveal="up">
-            Цена указана для купе. Для внедорожников и автомобилей со сложными панелями мастер уточнит её после осмотра.
+            Prices are for coupés. For SUVs and cars with complex panels the specialist will confirm the price after inspection.
           </p>
         </div>
         <div className="service-index__list" onPointerMove={onMove} onPointerLeave={() => setActive(null)}>
@@ -45,7 +45,7 @@ export function ServiceIndex() {
               <span className="service-row__summary">{s.summary}</span>
               <span className="service-row__duration caption">{s.duration}</span>
               <span className="service-row__price">
-                {s.variablePrice ? 'от ' : ''}
+                {s.variablePrice ? 'from ' : ''}
                 {formatPrice(s.priceFrom)}
               </span>
               <Icon name="arrowUpRight" className="service-row__arrow" />
@@ -54,7 +54,7 @@ export function ServiceIndex() {
         </div>
         <div className="service-index__more">
           <Link to="/detailing/" className="btn btn--ghost">
-            Все 17 услуг и пакеты <Icon name="arrow" />
+            All 17 services and packages <Icon name="arrow" />
           </Link>
         </div>
       </div>

@@ -11,16 +11,16 @@ export function BookingCta() {
       </div>
       <div className="cta__shade" aria-hidden="true" />
       <div className="wrap cta__content">
-        <Split id="cta-title" lines={['Ключи будут готовы', 'к вашему приезду']} className="h1 cta__title" />
+        <Split id="cta-title" lines={['The keys will be ready', 'by the time you arrive']} className="h1 cta__title" />
         <p className="lead" data-reveal="up">
-          Оставьте заявку — менеджер подтвердит время в течение 30 минут, а автомобиль пройдёт финальный осмотр перед выдачей.
+          Send a request — a manager will confirm the time within 30 minutes, and the car will get a final inspection before handover.
         </p>
         <div className="cta__actions" data-reveal="up" style={{ '--d': 120 } as React.CSSProperties}>
           <Link to="/booking/" className="btn btn--primary">
-            Забронировать автомобиль <Icon name="arrow" />
+            Book a car <Icon name="arrow" />
           </Link>
           <Link to="/booking/?type=detailing" className="btn btn--ghost">
-            Записаться в студию
+            Book at the studio
           </Link>
         </div>
       </div>

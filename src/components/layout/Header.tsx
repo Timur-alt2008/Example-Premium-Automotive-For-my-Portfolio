@@ -42,7 +42,7 @@ export function Header() {
       <header className={['header', scrolled ? 'is-scrolled' : '', hidden && !menuOpen ? 'is-hidden' : ''].filter(Boolean).join(' ')}>
         <div className="header__inner wrap">
           <Logo />
-          <nav className="nav" aria-label="Основная навигация">
+          <nav className="nav" aria-label="Main navigation">
             {mainNav.map((item) => (
               <NavLink key={item.to} {...item} />
             ))}
@@ -52,9 +52,9 @@ export function Header() {
               {company.phones.rental.display}
             </a>
             <Link to="/booking/" className="btn btn--primary btn--small header__cta">
-              Забронировать
+              Book
             </Link>
-            <button type="button" className="header__burger" aria-label={menuOpen ? 'Закрыть меню' : 'Открыть меню'} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen((v) => !v)}>
+            <button type="button" className="header__burger" aria-label={menuOpen ? 'Close menu' : 'Open menu'} aria-expanded={menuOpen} aria-controls="mobile-menu" onClick={() => setMenuOpen((v) => !v)}>
               <span />
               <span />
             </button>
@@ -69,7 +69,7 @@ export function Header() {
 export function SkipLink() {
   return (
     <a className="skip-link" href="#main">
-      Перейти к содержанию <Icon name="arrow" />
+      Skip to content <Icon name="arrow" />
     </a>
   );
 }

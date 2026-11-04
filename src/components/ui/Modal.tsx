@@ -57,7 +57,7 @@ export function Modal({ open, onClose, label, children, variant = 'dialog', clas
   return createPortal(
     <div className={`modal modal--${variant} ${className ?? ''}`} role="presentation" onMouseDown={(e) => e.target === e.currentTarget && onClose()}>
       <div className="modal__panel" role="dialog" aria-modal="true" aria-label={label} ref={panel} tabIndex={-1}>
-        <button type="button" className="modal__close" onClick={onClose} aria-label="Закрыть">
+        <button type="button" className="modal__close" onClick={onClose} aria-label="Close">
           <Icon name="close" />
         </button>
         {children}

@@ -14,23 +14,23 @@ export default function Booking() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Бронирование' }]}
-        title={mode === 'rental' ? ['Бронирование', 'автомобиля'] : ['Запись', 'в студию']}
+        crumbs={[{ label: 'Booking' }]}
+        title={mode === 'rental' ? ['Book', 'a car'] : ['Book', 'a studio visit']}
         lead={
           <>
-            Заполните форму — менеджер свяжется с вами в течение 30 минут в рабочее время. Удобнее голосом? Аренда: <a href={company.phones.rental.href}>{company.phones.rental.display}</a>, студия: <a href={company.phones.studio.href}>{company.phones.studio.display}</a>.
+            Fill in the form — a manager will contact you within 30 minutes during working hours. Prefer to talk? Rental: <a href={company.phones.rental.href}>{company.phones.rental.display}</a>, studio: <a href={company.phones.studio.href}>{company.phones.studio.display}</a>.
           </>
         }
       />
-      <section className="section--tight booking" aria-label="Форма заявки">
+      <section className="section--tight booking" aria-label="Request form">
         <div className="wrap">
           <Segmented
-            label="Тип заявки"
+            label="Request type"
             value={mode}
             onChange={(m) => setParams({ type: m === 'rental' ? null : m, car: null, service: null, package: null })}
             options={[
-              { value: 'rental', label: 'Аренда автомобиля' },
-              { value: 'detailing', label: 'Запись на детейлинг' },
+              { value: 'rental', label: 'Car rental' },
+              { value: 'detailing', label: 'Detailing appointment' },
             ]}
             className="booking__switch"
           />

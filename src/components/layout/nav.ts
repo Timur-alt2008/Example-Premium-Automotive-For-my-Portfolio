@@ -1,8 +1,8 @@
 export const mainNav = [
-  { to: '/detailing/', label: 'Детейлинг' },
-  { to: '/cars/', label: 'Автопарк' },
-  { to: '/gallery/', label: 'Галерея' },
-  { to: '/about/', label: 'О студии' },
-  { to: '/faq/', label: 'Вопросы' },
-  { to: '/contacts/', label: 'Контакты' },
+  { to: '/detailing/', label: 'Detailing' },
+  { to: '/cars/', label: 'Fleet' },
+  { to: '/gallery/', label: 'Gallery' },
+  { to: '/about/', label: 'About' },
+  { to: '/faq/', label: 'Questions' },
+  { to: '/contacts/', label: 'Contacts' },
 ];

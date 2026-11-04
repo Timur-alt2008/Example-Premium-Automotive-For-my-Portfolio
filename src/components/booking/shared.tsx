@@ -14,9 +14,9 @@ export type ContactErrors = Partial<Record<keyof ContactValues, string>>;
 export function ContactFields({ values, errors, onChange, onBlur }: { values: ContactValues; errors: ContactErrors; onChange: (key: keyof ContactValues, value: string) => void; onBlur: (key: keyof ContactValues) => void }) {
   return (
     <div className="form-grid">
-      <TextField label="Имя" name="name" autoComplete="name" value={values.name} error={errors.name} onChange={(e) => onChange('name', e.target.value)} onBlur={() => onBlur('name')} fieldClassName="span-2" />
-      <TextField label="Телефон" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 555 010 0000" value={values.phone} error={errors.phone} onChange={(e) => onChange('phone', e.target.value)} onBlur={() => onBlur('phone')} />
-      <TextField label="Электронная почта" name="email" type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" value={values.email} error={errors.email} onChange={(e) => onChange('email', e.target.value)} onBlur={() => onBlur('email')} />
+      <TextField label="Name" name="name" autoComplete="name" value={values.name} error={errors.name} onChange={(e) => onChange('name', e.target.value)} onBlur={() => onBlur('name')} fieldClassName="span-2" />
+      <TextField label="Phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" placeholder="+1 555 010 0000" value={values.phone} error={errors.phone} onChange={(e) => onChange('phone', e.target.value)} onBlur={() => onBlur('phone')} />
+      <TextField label="E-mail" name="email" type="email" inputMode="email" autoComplete="email" placeholder="name@example.com" value={values.email} error={errors.email} onChange={(e) => onChange('email', e.target.value)} onBlur={() => onBlur('email')} />
     </div>
   );
 }
@@ -30,7 +30,7 @@ export function Consent({ checked, onChange, error }: { checked: boolean; onChan
           <Icon name="check" />
         </span>
         <span>
-          Согласен на обработку данных по <Link to="/privacy/">политике конфиденциальности</Link>
+          I agree to data processing under the <Link to="/privacy/">privacy policy</Link>
         </span>
       </label>
       {error ? (
@@ -70,7 +70,7 @@ export function ErrorBanner({ message, onRetry }: { message: string; onRetry: ()
       <Icon name="alert" />
       <p>{message}</p>
       <button type="button" className="btn btn--ghost btn--small" onClick={onRetry}>
-        Отправить ещё раз
+        Send again
       </button>
     </div>
   );
@@ -81,7 +81,7 @@ export function SubmitButton({ sending, label }: { sending: boolean; label: stri
     <button type="submit" className={['btn btn--primary btn--block submit', sending ? 'is-sending' : ''].join(' ')} disabled={sending} aria-busy={sending}>
       {sending ? (
         <>
-          <span className="spinner" aria-hidden="true" /> Отправляем заявку
+          <span className="spinner" aria-hidden="true" /> Sending your request
         </>
       ) : (
         <>

@@ -23,16 +23,16 @@ export default function Detailing() {
   return (
     <>
       <PageHero
-        crumbs={[{ label: 'Детейлинг' }]}
-        title={['Детейлинг', 'без компромиссов']}
+        crumbs={[{ label: 'Detailing' }]}
+        title={['Detailing', 'without compromise']}
         photo="det-polish"
-        lead="Полировка, керамика, плёнка и уход за салоном в студии на 1 400 м². Каждая работа заканчивается проверкой под тремя видами света — рассеянным, точечным и солнечным спектром."
+        lead="Polishing, ceramic coatings, film and interior care in a 1,400 m² studio. Every job ends with an inspection under three kinds of light — diffused, spot and full-spectrum sunlight."
       >
         <Link to="/booking/?type=detailing" className="btn btn--primary">
-          Записаться <Icon name="arrow" />
+          Book <Icon name="arrow" />
         </Link>
         <a href="#packages" className="btn btn--ghost">
-          Сравнить пакеты
+          Compare packages
         </a>
       </PageHero>
 
@@ -41,12 +41,12 @@ export default function Detailing() {
       <section className="section services-catalog" aria-labelledby="services-catalog-title">
         <div className="wrap">
           <div className="section-head">
-            <Split id="services-catalog-title" lines={['Услуги', 'для кузова и салона']} className="h2" />
+            <Split id="services-catalog-title" lines={['Services', 'for body and interior']} className="h2" />
             <Segmented
-              label="Группа услуг"
+              label="Service group"
               value={filter}
               onChange={setFilter}
-              options={(['all', 'exterior', 'interior'] as Filter[]).map((g) => ({ value: g, label: g === 'all' ? 'Все' : groupLabels[g], count: count(g) }))}
+              options={(['all', 'exterior', 'interior'] as Filter[]).map((g) => ({ value: g, label: g === 'all' ? 'All' : groupLabels[g], count: count(g) }))}
             />
           </div>
           <div className="services-grid" data-testid="services-grid">
@@ -58,15 +58,15 @@ export default function Detailing() {
       </section>
 
       <PackageCompare />
-      <BeforeAfterShowcase title={['Результат,', 'который видно']} />
+      <BeforeAfterShowcase title={['A result', 'you can see']} />
       <Process />
 
       <section className="section faq-teaser" aria-labelledby="detailing-faq-title">
         <div className="wrap faq-teaser__grid">
           <div>
-            <Split id="detailing-faq-title" lines={['Частые вопросы', 'о детейлинге']} className="h2" />
+            <Split id="detailing-faq-title" lines={['Detailing', 'questions']} className="h2" />
             <Link to="/faq/" className="text-link">
-              Все вопросы <Icon name="arrow" />
+              All questions <Icon name="arrow" />
             </Link>
           </div>
           <FaqList items={faq.filter((f) => f.category === 'detailing')} />

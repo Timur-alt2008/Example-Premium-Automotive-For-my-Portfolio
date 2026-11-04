@@ -2,7 +2,7 @@
 export function StylizedMap({ className }: { className?: string }) {
   return (
     <div className={['map', className].filter(Boolean).join(' ')}>
-      <svg viewBox="0 0 800 520" role="img" aria-label="Схема проезда к студии Example: Example Avenue, 1, въезд с северной стороны">
+      <svg viewBox="0 0 800 520" role="img" aria-label="Map to the Example studio: Example Avenue, 1, entrance from the north side">
         <defs>
           <pattern id="map-grid" width="40" height="40" patternUnits="userSpaceOnUse">
             <path d="M40 0H0v40" fill="none" stroke="rgba(236,233,226,0.05)" />
@@ -36,8 +36,8 @@ export function StylizedMap({ className }: { className?: string }) {
         <circle cx="465" cy="284" r="7" fill="#fbf8f1" />
         <text x="465" y="364" textAnchor="middle" fill="#f1eee8" fontFamily="Unbounded, sans-serif" fontSize="16" letterSpacing="2">EXAMPLE</text>
         <text x="610" y="190" fill="#a2a5ad" fontFamily="Manrope, sans-serif" fontSize="13">Example Avenue</text>
-        <text x="492" y="40" fill="#a2a5ad" fontFamily="Manrope, sans-serif" fontSize="13" transform="rotate(90 492 40)">Сектор 7</text>
-        <text x="472" y="208" fill="#cbb68a" fontFamily="Manrope, sans-serif" fontSize="12">въезд</text>
+        <text x="492" y="40" fill="#a2a5ad" fontFamily="Manrope, sans-serif" fontSize="13" transform="rotate(90 492 40)">Sector 7</text>
+        <text x="472" y="208" fill="#cbb68a" fontFamily="Manrope, sans-serif" fontSize="12">entrance</text>
       </svg>
     </div>
   );

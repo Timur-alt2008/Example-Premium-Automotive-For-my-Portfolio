@@ -13,10 +13,10 @@ import { submitRequest, SubmitError } from '../lib/requests';
 import { required, validateEmail, validateName } from '../lib/validation';
 
 const topics = [
-  { value: 'rental', label: 'Аренда автомобиля' },
-  { value: 'detailing', label: 'Детейлинг' },
-  { value: 'partnership', label: 'Сотрудничество' },
-  { value: 'other', label: 'Другое' },
+  { value: 'rental', label: 'Car rental' },
+  { value: 'detailing', label: 'Detailing' },
+  { value: 'partnership', label: 'Partnerships' },
+  { value: 'other', label: 'Other' },
 ];
 
 function ContactForm() {
@@ -32,9 +32,9 @@ function ContactForm() {
   const errors = {
     name: validateName(values.name),
     email: validateEmail(values.email),
-    topic: required(values.topic, 'Выберите тему обращения'),
-    message: values.message.trim().length < 10 ? 'Опишите вопрос хотя бы в нескольких словах' : undefined,
-    consent: consent ? undefined : 'Нужно согласие на обработку данных',
+    topic: required(values.topic, 'Choose a subject'),
+    message: values.message.trim().length < 10 ? 'Describe your question in at least a few words' : undefined,
+    consent: consent ? undefined : 'Consent to data processing is required',
   };
   const show = (k: keyof typeof errors) => (submitted ? errors[k] : undefined);
   const set = (k: keyof typeof values, v: string) => setValues((s) => ({ ...s, [k]: v }));
@@ -45,13 +45,13 @@ function ContactForm() {
     if (Object.values(errors).some(Boolean)) return focusFirstError(form.current);
     setStatus('sending');
     try {
-      const r = await submitRequest({ kind: 'contact', title: 'Обращение', contact: { name: values.name, email: values.email }, lines: [['Тема', topics.find((t) => t.value === values.topic)!.label], ['Сообщение', values.message.trim()]] });
+      const r = await submitRequest({ kind: 'contact', title: 'Subject', contact: { name: values.name, email: values.email }, lines: [['Subject', topics.find((t) => t.value === values.topic)!.label], ['Message', values.message.trim()]] });
       setNumber(r.number);
       setStatus('done');
-      toast('Сообщение отправлено', 'success');
+      toast('Message sent', 'success');
     } catch (err) {
       setStatus('error');
-      setErrorText(err instanceof SubmitError ? err.message : 'Не удалось отправить сообщение. Попробуйте ещё раз или позвоните нам.');
+      setErrorText(err instanceof SubmitError ? err.message : 'The message could not be sent. Try again or give us a call.');
     }
   };
 
@@ -61,11 +61,11 @@ function ContactForm() {
         <span className="result__icon result__icon--ok" aria-hidden="true">
           <Icon name="check" />
         </span>
-        <h2 className="h3">Сообщение отправлено</h2>
+        <h2 className="h3">Message sent</h2>
         <p className="muted">
-          Номер обращения <strong>{number}</strong>. Ответим на {values.email} в течение рабочего дня.
+          Request number <strong>{number}</strong>. We will reply to {values.email} within one working day.
         </p>
-        <DemoNote>Демонстрационная форма: сообщение сохранено только в вашем браузере.</DemoNote>
+        <DemoNote>Demonstration form: the message is stored only in your browser.</DemoNote>
         <button
           type="button"
           className="btn btn--ghost"
@@ -76,24 +76,24 @@ function ContactForm() {
             setStatus('idle');
           }}
         >
-          Написать ещё
+          Write again
         </button>
       </div>
     );
   }
 
   return (
-    <form className="contact-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Форма обратной связи" data-testid="contact-form">
-      <h2 className="h3">Напишите нам</h2>
+    <form className="contact-form" ref={form} onSubmit={onSubmit} noValidate aria-label="Contact form" data-testid="contact-form">
+      <h2 className="h3">Write to us</h2>
       <div className="form-grid">
-        <TextField label="Имя" name="name" autoComplete="name" value={values.name} error={show('name')} onChange={(e) => set('name', e.target.value)} />
-        <TextField label="Электронная почта" name="email" type="email" autoComplete="email" value={values.email} error={show('email')} onChange={(e) => set('email', e.target.value)} />
-        <SelectField label="Тема" name="topic" placeholder="Выберите тему" options={topics} value={values.topic} error={show('topic')} onChange={(e) => set('topic', e.target.value)} fieldClassName="span-2" />
-        <TextArea label="Сообщение" name="message" value={values.message} error={show('message')} onChange={(e) => set('message', e.target.value)} fieldClassName="span-2" />
+        <TextField label="Name" name="name" autoComplete="name" value={values.name} error={show('name')} onChange={(e) => set('name', e.target.value)} />
+        <TextField label="E-mail" name="email" type="email" autoComplete="email" value={values.email} error={show('email')} onChange={(e) => set('email', e.target.value)} />
+        <SelectField label="Subject" name="topic" placeholder="Choose a subject" options={topics} value={values.topic} error={show('topic')} onChange={(e) => set('topic', e.target.value)} fieldClassName="span-2" />
+        <TextArea label="Message" name="message" value={values.message} error={show('message')} onChange={(e) => set('message', e.target.value)} fieldClassName="span-2" />
       </div>
       <Consent checked={consent} onChange={setConsent} error={show('consent')} />
       {status === 'error' ? <ErrorBanner message={errorText} onRetry={() => form.current?.requestSubmit()} /> : null}
-      <SubmitButton sending={status === 'sending'} label="Отправить сообщение" />
+      <SubmitButton sending={status === 'sending'} label="Send message" />
     </form>
   );
 }
@@ -103,12 +103,12 @@ export default function Contacts() {
   const status = mounted ? openStatus() : null;
   return (
     <>
-      <PageHero crumbs={[{ label: 'Контакты' }]} title={['Контакты']} lead="Студия и выдача автомобилей находятся в одном здании. Приезжайте без записи посмотреть боксы или позвоните — расскажем, как добраться." />
-      <section className="section--tight contacts" aria-label="Контактная информация">
+      <PageHero crumbs={[{ label: 'Contacts' }]} title={['Contacts']} lead="The studio and the car handover are in the same building. Drop in without an appointment to see the bays, or call us — we will tell you how to get here." />
+      <section className="section--tight contacts" aria-label="Contact information">
         <div className="wrap contacts__grid">
           <div className="contacts__info">
             <div className="contacts__block">
-              <h2 className="caption">Адрес</h2>
+              <h2 className="caption">Address</h2>
               <address className="h3">
                 {company.address.street}
                 <br />
@@ -127,7 +127,7 @@ export default function Contacts() {
               ))}
               {Object.entries(company.emails).map(([k, e]) => (
                 <a key={k} href={`mailto:${e}`} className="contact-card">
-                  <span className="caption">{k === 'studio' ? 'Студия' : k === 'rental' ? 'Аренда' : 'Общие вопросы'}</span>
+                  <span className="caption">{k === 'studio' ? 'Studio' : k === 'rental' ? 'Rental' : 'General questions'}</span>
                   <span className="contact-card__value">
                     <Icon name="mail" /> {e}
                   </span>
@@ -135,17 +135,17 @@ export default function Contacts() {
               ))}
             </div>
             <div className="contacts__block">
-              <h2 className="caption">Часы работы студии</h2>
+              <h2 className="caption">Studio opening hours</h2>
               {status ? (
                 <p className={['open-status', status.open ? 'is-open' : ''].join(' ')}>
                   <span className={['status-dot', status.open ? 'is-open' : ''].join(' ')} aria-hidden="true" /> {status.text}
                 </p>
               ) : null}
               <HoursList />
-              <p className="small muted">Выдача и приём арендных автомобилей — круглосуточно по предварительной договорённости.</p>
+              <p className="small muted">Rental car handover and return — around the clock by prior arrangement.</p>
             </div>
             <div className="contacts__block">
-              <h2 className="caption">Мы в соцсетях</h2>
+              <h2 className="caption">Follow us</h2>
               <Socials />
             </div>
           </div>
@@ -155,7 +155,7 @@ export default function Contacts() {
         </div>
         <div className="wrap contacts__map">
           <StylizedMap />
-          <p className="caption">Схема условная: адрес и район вымышлены.</p>
+          <p className="caption">The map is schematic: the address and district are fictional.</p>
         </div>
       </section>
     </>

@@ -35,7 +35,7 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
   return (
     <div id="mobile-menu" className={['menu', open ? 'is-open' : ''].join(' ')} ref={ref} inert={!open} aria-hidden={!open}>
       <div className="menu__inner">
-        <nav aria-label="Мобильная навигация">
+        <nav aria-label="Mobile navigation">
           <ul className="menu__list">
             {mainNav.map((item, i) => (
               <MenuLink key={item.to} {...item} index={i} onClose={onClose} />
@@ -44,10 +44,10 @@ export function MobileMenu({ open, onClose }: { open: boolean; onClose: () => vo
         </nav>
         <div className="menu__footer">
           <Link to="/booking/" className="btn btn--primary btn--block" onClick={onClose}>
-            Забронировать автомобиль
+            Book a car
           </Link>
           <Link to="/booking/?type=detailing" className="btn btn--ghost btn--block" onClick={onClose}>
-            Записаться на детейлинг
+            Book detailing
           </Link>
           <div className="menu__contacts">
             <a href={company.phones.rental.href}>

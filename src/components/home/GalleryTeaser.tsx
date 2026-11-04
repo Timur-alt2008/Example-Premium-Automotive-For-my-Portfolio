@@ -20,21 +20,21 @@ export function GalleryTeaser() {
     <section className="section gallery-teaser" aria-labelledby="gallery-teaser-title">
       <div className="wrap">
         <div className="section-head">
-          <Split id="gallery-teaser-title" lines={['Из мастерской', 'и с дороги']} className="h2" />
+          <Split id="gallery-teaser-title" lines={['From the workshop', 'and from the road']} className="h2" />
           <p className="lead" data-reveal="up">
-            Работы студии и автомобили коллекции. Нажмите на фото, чтобы открыть его на весь экран.
+            The studio’s work and the cars of the collection. Tap a photo to open it full screen.
           </p>
         </div>
         <Segmented
-            label="Категория фотографий"
+            label="Photo category"
             value={filter}
             onChange={setFilter}
-            options={teaserCategories.map((c) => ({ value: c, label: c === 'all' ? 'Все' : galleryCategoryLabels[c] }))}
+            options={teaserCategories.map((c) => ({ value: c, label: c === 'all' ? 'All' : galleryCategoryLabels[c] }))}
             className="gallery-teaser__filters"
           />
         <div className="mosaic" key={filter}>
           {items.map((g, i) => (
-            <button key={`${g.photo}-${i}`} type="button" className={`mosaic__item mosaic__item--${i}`} onClick={() => setOpen(i)} aria-label={`Открыть фото: ${g.caption}`}>
+            <button key={`${g.photo}-${i}`} type="button" className={`mosaic__item mosaic__item--${i}`} onClick={() => setOpen(i)} aria-label={`Open photo: ${g.caption}`}>
               <Photo k={g.photo} sizes="(min-width: 900px) 40vw, 100vw" maxWidth={1440} />
               <span className="mosaic__caption">
                 <span>{g.caption}</span>
@@ -45,7 +45,7 @@ export function GalleryTeaser() {
         </div>
         <div className="gallery-teaser__more">
           <Link to="/gallery/" className="btn btn--ghost">
-            Вся галерея <Icon name="arrow" />
+            All photos <Icon name="arrow" />
           </Link>
         </div>
       </div>

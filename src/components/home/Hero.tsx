@@ -76,36 +76,36 @@ export function Hero() {
         <div className="hero__beam" aria-hidden="true" />
       </div>
       <div className="hero__content wrap">
-        <p className="hero__kicker hero__fade">Детейлинг-студия и коллекция суперкаров</p>
+        <p className="hero__kicker hero__fade">A detailing studio and a supercar collection</p>
         <h1 className="hero__title h1 split" id="hero-title">
           <span className="split-line">
-            <span>Безупречно</span>
+            <span>Flawless</span>
           </span>
           <span className="split-line">
-            <span>при любом свете</span>
+            <span>under any light</span>
           </span>
         </h1>
         <div className="hero__bottom">
-          <p className="hero__lead lead">Мы проверяем каждую панель под тремя видами освещения — и только потом отдаём ключи. Будь то ваш автомобиль после полировки или McLaren из нашей коллекции.</p>
+          <p className="hero__lead lead">We check every panel under three kinds of light — and only then hand over the keys. Whether it is your own car after polishing or a McLaren from our collection.</p>
           <div className="hero__actions hero__fade">
             <Link to="/detailing/" className="btn btn--primary">
-              Услуги студии <Icon name="arrow" />
+              Studio services <Icon name="arrow" />
             </Link>
             <Link to="/cars/" className="btn btn--ghost">
-              Выбрать автомобиль
+              Choose a car
             </Link>
           </div>
         </div>
       </div>
       <div className="hero__meta wrap hero__fade">
         <p>
-          <span className={['status-dot', status?.startsWith('Открыто') ? 'is-open' : ''].join(' ')} aria-hidden="true" />
-          {status ?? 'Студия: ежедневно'}
+          <span className={['status-dot', status?.startsWith('Open') ? 'is-open' : ''].join(' ')} aria-hidden="true" />
+          {status ?? 'Studio: daily'}
         </p>
-        <p>{cars.length} автомобилей в коллекции</p>
-        <p>Свет 6500 K в каждом боксе</p>
+        <p>{cars.length} cars in the collection</p>
+        <p>6500 K light in every bay</p>
       </div>
-      <a href="#intro" className="hero__scroll hero__fade" aria-label="Прокрутить к следующему разделу">
+      <a href="#intro" className="hero__scroll hero__fade" aria-label="Scroll to the next section">
         <span className="hero__scroll-track" aria-hidden="true">
           <span />
         </span>

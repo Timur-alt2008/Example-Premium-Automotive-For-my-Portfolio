@@ -5,16 +5,16 @@
  */
 export const company = {
   name: 'Example',
-  descriptor: 'Детейлинг-студия и коллекция автомобилей',
+  descriptor: 'A detailing studio and a car collection',
   founded: 2014,
   address: {
     street: 'Example Avenue, 1',
-    district: 'Сектор 7, Example City',
-    note: 'Въезд с северной стороны, ворота с подсветкой',
+    district: 'Sector 7, Example City',
+    note: 'Entrance from the north side, illuminated gates',
   },
   phones: {
-    studio: { label: 'Студия детейлинга', display: '+1 (555) 010-0177', href: 'tel:+15550100177' },
-    rental: { label: 'Аренда автомобилей', display: '+1 (555) 010-0188', href: 'tel:+15550100188' },
+    studio: { label: 'Detailing studio', display: '+1 (555) 010-0177', href: 'tel:+15550100177' },
+    rental: { label: 'Car rental', display: '+1 (555) 010-0188', href: 'tel:+15550100188' },
   },
   emails: {
     studio: 'studio@example.com',
@@ -28,9 +28,9 @@ export const company = {
     { id: 'whatsapp', label: 'WhatsApp' },
   ],
   facts: [
-    { value: '1 400', unit: 'м²', label: 'студия с отдельными боксами для полировки, керамики и плёнки' },
-    { value: '14', unit: '', label: 'автомобилей в коллекции для аренды' },
-    { value: '6500', unit: 'K', label: 'температура света, под которым мы проверяем каждую панель' },
+    { value: '1,400', unit: 'm²', label: 'studio with separate bays for polishing, ceramic coatings and film' },
+    { value: '14', unit: '', label: 'cars in the rental collection' },
+    { value: '6500', unit: 'K', label: 'colour temperature of the light we inspect every panel under' },
   ],
 } as const;
 
@@ -43,26 +43,26 @@ export interface OpeningHours {
 }
 
 export const studioHours: OpeningHours[] = [
-  { day: 1, label: 'Понедельник', open: '09:00', close: '21:00' },
-  { day: 2, label: 'Вторник', open: '09:00', close: '21:00' },
-  { day: 3, label: 'Среда', open: '09:00', close: '21:00' },
-  { day: 4, label: 'Четверг', open: '09:00', close: '21:00' },
-  { day: 5, label: 'Пятница', open: '09:00', close: '21:00' },
-  { day: 6, label: 'Суббота', open: '10:00', close: '19:00' },
-  { day: 0, label: 'Воскресенье', open: '10:00', close: '17:00' },
+  { day: 1, label: 'Monday', open: '09:00', close: '21:00' },
+  { day: 2, label: 'Tuesday', open: '09:00', close: '21:00' },
+  { day: 3, label: 'Wednesday', open: '09:00', close: '21:00' },
+  { day: 4, label: 'Thursday', open: '09:00', close: '21:00' },
+  { day: 5, label: 'Friday', open: '09:00', close: '21:00' },
+  { day: 6, label: 'Saturday', open: '10:00', close: '19:00' },
+  { day: 0, label: 'Sunday', open: '10:00', close: '17:00' },
 ];
 
 export function openStatus(now = new Date()): { open: boolean; text: string } {
   const today = studioHours.find((h) => h.day === now.getDay());
-  if (!today || !today.open || !today.close) return { open: false, text: 'Сегодня выходной' };
+  if (!today || !today.open || !today.close) return { open: false, text: 'Closed today' };
   const minutes = now.getHours() * 60 + now.getMinutes();
   const toMin = (t: string) => Number(t.slice(0, 2)) * 60 + Number(t.slice(3));
   if (minutes >= toMin(today.open) && minutes < toMin(today.close)) {
-    return { open: true, text: `Открыто до ${today.close}` };
+    return { open: true, text: `Open until ${today.close}` };
   }
-  if (minutes < toMin(today.open)) return { open: false, text: `Откроемся в ${today.open}` };
+  if (minutes < toMin(today.open)) return { open: false, text: `We open at ${today.open}` };
   const tomorrow = studioHours.find((h) => h.day === (now.getDay() + 1) % 7);
-  return { open: false, text: tomorrow?.open ? `Откроемся завтра в ${tomorrow.open}` : 'Закрыто' };
+  return { open: false, text: tomorrow?.open ? `We open tomorrow at ${tomorrow.open}` : 'Closed' };
 }
 
 export interface TeamMember {
@@ -75,36 +75,36 @@ export interface TeamMember {
 
 /** Fictional team. Photos show work in progress, not portraits of real people. */
 export const team: TeamMember[] = [
-  { name: 'Марк Левин', role: 'Основатель, руководитель студии', since: 2014, focus: 'Принимает каждый автомобиль лично и подписывает итоговый осмотр.', photo: 'det-wax-b' },
-  { name: 'Ева Ростова', role: 'Руководитель коллекции', since: 2019, focus: 'Отвечает за состояние парка и подбирает автомобиль под маршрут клиента.', photo: 'int-black' },
-  { name: 'Даниил Корф', role: 'Старший мастер по полировке', since: 2016, focus: 'Специализируется на мягких лаках японских и итальянских марок.', photo: 'det-polish' },
-  { name: 'Ирина Ланская', role: 'Мастер по PPF', since: 2018, focus: 'Готовит выкройки и заворачивает кромки так, что плёнку не видно.', photo: 'det-film-a' },
-  { name: 'Тимофей Грин', role: 'Специалист по керамике', since: 2020, focus: 'Работает в боксе с контролем влажности и ведёт журнал полимеризации.', photo: 'det-wax-a' },
-  { name: 'Алиса Вайс', role: 'Консьерж-сервис', since: 2021, focus: 'Организует доставку, подменный автомобиль и встречу в аэропорту.', photo: 'det-dash-a' },
+  { name: 'Mark Levin', role: 'Founder, studio director', since: 2014, focus: 'Checks in every car personally and signs off the final inspection.', photo: 'det-wax-b' },
+  { name: 'Eva Rostova', role: 'Head of the collection', since: 2019, focus: 'Looks after the fleet and matches each client with the right car for their route.', photo: 'int-black' },
+  { name: 'Daniel Korf', role: 'Senior polishing specialist', since: 2016, focus: 'Specialises in the soft paints of Japanese and Italian brands.', photo: 'det-polish' },
+  { name: 'Irina Lanskaya', role: 'PPF specialist', since: 2018, focus: 'Prepares the templates and wraps the edges so the film cannot be seen.', photo: 'det-film-a' },
+  { name: 'Timothy Green', role: 'Ceramic coating specialist', since: 2020, focus: 'Works in a humidity-controlled bay and keeps a curing log.', photo: 'det-wax-a' },
+  { name: 'Alice Weiss', role: 'Concierge service', since: 2021, focus: 'Arranges delivery, a courtesy car and airport pick-ups.', photo: 'det-dash-a' },
 ];
 
 export const milestones = [
-  { year: 2014, text: 'Два поста в арендованном гараже и одна полировальная машинка.' },
-  { year: 2017, text: 'Отдельный бокс для плёнки и плоттер для раскроя по лекалам.' },
-  { year: 2019, text: 'Переезд в здание на 1 400 м² со светом 6500 K в каждом боксе.' },
-  { year: 2021, text: 'Первые четыре автомобиля в аренду — для клиентов студии.' },
-  { year: 2024, text: 'Коллекция выросла до четырнадцати машин и собственной службы доставки.' },
+  { year: 2014, text: 'Two bays in a rented garage and a single polisher.' },
+  { year: 2017, text: 'A separate bay for film and a plotter for cutting from templates.' },
+  { year: 2019, text: 'A move to a 1,400 m² building with 6500 K lighting in every bay.' },
+  { year: 2021, text: 'The first four rental cars — for the studio’s clients.' },
+  { year: 2024, text: 'The collection has grown to fourteen cars and its own delivery service.' },
 ];
 
 export const advantages = [
-  { icon: 'equipment', title: 'Профессиональное оборудование', text: 'Эксцентриковые машинки с ходом 15 и 21 мм, толщиномеры ЛКП, ИК-сушка и плоттер для раскроя плёнки.' },
-  { icon: 'materials', title: 'Материалы с паспортом', text: 'Работаем только с составами, у которых есть технический лист и понятный срок службы.' },
-  { icon: 'person', title: 'Один мастер на один автомобиль', text: 'Машину ведёт один специалист от приёмки до выдачи — он знает каждую её панель.' },
-  { icon: 'check', title: 'Контроль под тремя видами света', text: 'Рассеянный свет, точечный фонарь и солнечный спектр. Работа считается законченной, только если её не видно ни под одним из них.' },
-  { icon: 'detail', title: 'Внимание к деталям', text: 'Проёмы, эмблемы, дренажи и внутренняя сторона дисков — в стандартном объёме работ.' },
-  { icon: 'lock', title: 'Конфиденциальность', text: 'Закрытый въезд, отдельная зона выдачи и никаких фотографий ваших автомобилей без согласия.' },
-  { icon: 'lounge', title: 'Комфортное ожидание', text: 'Лаунж с видом на бокс, кофе и рабочее место. Или доставка автомобиля к вашему дому.' },
+  { icon: 'equipment', title: 'Professional equipment', text: 'Dual-action polishers with 15 and 21 mm throws, paint thickness gauges, infrared curing and a plotter for cutting film.' },
+  { icon: 'materials', title: 'Products with data sheets', text: 'We only use products that come with a technical data sheet and a clear service life.' },
+  { icon: 'person', title: 'One specialist per car', text: 'One specialist handles the car from check-in to handover — and knows every panel of it.' },
+  { icon: 'check', title: 'Inspection under three kinds of light', text: 'Diffused light, a spot torch and full-spectrum sunlight. The work is finished only when nothing shows under any of them.' },
+  { icon: 'detail', title: 'Attention to detail', text: 'Door shuts, badges, drains and the inside of the wheels — all part of the standard job.' },
+  { icon: 'lock', title: 'Privacy', text: 'A gated entrance, a private handover area and no photos of your car without your consent.' },
+  { icon: 'lounge', title: 'Comfortable waiting', text: 'A lounge overlooking the bay, coffee and a place to work. Or delivery of the car to your door.' },
 ] as const;
 
 export const processSteps = [
-  { title: 'Заявка', text: 'Вы описываете задачу, мы предлагаем время и примерную стоимость.' },
-  { title: 'Осмотр под светом', text: 'Замеряем толщину лака, фотографируем дефекты и согласуем объём работ.' },
-  { title: 'Работа', text: 'Автомобиль ведёт один мастер, вы получаете фото с каждого этапа.' },
-  { title: 'Контроль', text: 'Руководитель студии проверяет каждую панель под тремя видами света.' },
-  { title: 'Выдача', text: 'Показываем результат, объясняем уход и выдаём сертификат на покрытие.' },
+  { title: 'Request', text: 'You describe the job, we suggest a time and an estimated price.' },
+  { title: 'Inspection under light', text: 'We measure the paint thickness, photograph defects and agree the scope of work.' },
+  { title: 'Work', text: 'One specialist handles the car, and you get photos of every stage.' },
+  { title: 'Inspection', text: 'The studio manager checks every panel under three kinds of light.' },
+  { title: 'Handover', text: 'We show you the result, explain aftercare and hand over the coating certificate.' },
 ];

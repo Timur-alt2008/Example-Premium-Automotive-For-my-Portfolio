@@ -2,7 +2,7 @@ import { useCallback, useId, useRef, useState, type PointerEvent } from 'react';
 import type { BeforeAfterCase } from '../../data/content';
 import { Photo } from '../ui/Photo';
 
-/** Procedural defects drawn over the «before» state: swirl marks, stains or brake dust. */
+/** Procedural defects drawn over the “before” state: swirl marks, stains or brake dust. */
 function Defects({ kind }: { kind: BeforeAfterCase['defects'] }) {
   const id = useId().replace(/:/g, '');
   if (kind === 'swirls') {
@@ -108,14 +108,14 @@ export function BeforeAfter({ item, ratio = 16 / 10, sizes = '(min-width: 1100px
         data-testid="before-after"
       >
         <div className="ba__layer ba__layer--after">
-          <Photo k={item.photo} ratio={ratio} sizes={sizes} alt={`После: ${item.title}`} />
+          <Photo k={item.photo} ratio={ratio} sizes={sizes} alt={`After: ${item.title}`} />
         </div>
         <div className={`ba__layer ba__layer--before ba__layer--${item.defects}`} aria-hidden="true">
           <Photo k={item.photo} ratio={ratio} sizes={sizes} alt="" />
           <Defects kind={item.defects} />
         </div>
-        <span className="ba__tag ba__tag--before">До</span>
-        <span className="ba__tag ba__tag--after">После</span>
+        <span className="ba__tag ba__tag--before">To</span>
+        <span className="ba__tag ba__tag--after">After</span>
         <div className="ba__lamp" aria-hidden="true">
           <span className="ba__knob">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -124,7 +124,7 @@ export function BeforeAfter({ item, ratio = 16 / 10, sizes = '(min-width: 1100px
           </span>
         </div>
         <label className="visually-hidden" htmlFor={inputId}>
-          Положение разделителя «до» и «после»
+          Position of the “before” and “after” divider
         </label>
         <input id={inputId} className="ba__range" type="range" min={0} max={100} step={1} value={Math.round(pos)} onChange={(e) => setPos(Number(e.target.value))} />
       </div>
@@ -132,7 +132,7 @@ export function BeforeAfter({ item, ratio = 16 / 10, sizes = '(min-width: 1100px
         <span>
           <strong>{item.title}</strong> {item.service}
         </span>
-        <span className="caption">{item.note} Исходное состояние показано как визуализация.</span>
+        <span className="caption">{item.note} The original condition is shown as a visualisation.</span>
       </figcaption>
     </figure>
   );
