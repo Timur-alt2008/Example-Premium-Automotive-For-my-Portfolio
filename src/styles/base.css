@@ -106,7 +106,7 @@ ol {
 .h1,
 .h2,
 .h3 {
-  overflow-wrap: break-word;
+  overflow-wrap: anywhere;
   -webkit-hyphens: auto;
   hyphens: auto;
   font-family: var(--font-display);
@@ -444,6 +444,7 @@ html.js [data-reveal].is-in {
 
 .split-line > span {
   display: block;
+  min-width: 0;
 }
 
 html.js .split[data-split] .split-line > span {

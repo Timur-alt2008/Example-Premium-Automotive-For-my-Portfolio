@@ -576,6 +576,7 @@ html.js.is-loaded .loader {
 
 .page-hero__grid {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 40px;
   align-items: end;
 }

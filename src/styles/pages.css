@@ -1497,3 +1497,9 @@
     position: relative;
   }
 }
+
+.service-hero__content > *,
+.car-hero__content > *,
+.page-hero__text > * {
+  min-width: 0;
+}
