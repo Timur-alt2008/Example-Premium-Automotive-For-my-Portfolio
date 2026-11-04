@@ -47,18 +47,31 @@ export function usePageMeta(match: Match, path: string): void {
 /** Observes elements marked with data-reveal / data-split and adds .is-in when they enter. */
 export function observeReveals(root: ParentNode = document): () => void {
   if (typeof IntersectionObserver === 'undefined') return () => {};
+  // Elements revealed with clip-path are fully clipped at first, and Chrome applies the
+  // target's own clip-path when computing intersections, so their parent is observed instead.
+  const targets = new Map<Element, Element[]>();
   const io = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
-        }
+        if (!entry.isIntersecting) return;
+        (targets.get(entry.target) ?? []).forEach((el) => el.classList.add('is-in'));
+        targets.delete(entry.target);
+        io.unobserve(entry.target);
       });
     },
-    { rootMargin: '0px 0px -8% 0px', threshold: 0.12 },
+    { rootMargin: '0px 0px -8% 0px', threshold: 0.08 },
   );
-  const scan = () => root.querySelectorAll('[data-reveal]:not(.is-in), [data-split]:not(.is-in)').forEach((el) => io.observe(el));
+  const scan = () =>
+    root.querySelectorAll('[data-reveal]:not(.is-in), [data-split]:not(.is-in)').forEach((el) => {
+      const target = (el as HTMLElement).dataset.reveal === 'clip' && el.parentElement ? el.parentElement : el;
+      const list = targets.get(target);
+      if (list) {
+        if (!list.includes(el)) list.push(el);
+        return;
+      }
+      targets.set(target, [el]);
+      io.observe(target);
+    });
   scan();
   const mo = new MutationObserver(scan);
   mo.observe(root instanceof Document ? root.body : (root as Node), { childList: true, subtree: true });
